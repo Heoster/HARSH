@@ -1,0 +1,1666 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Python Project - Text to Speech | Harsh - Class 11A</title>
+    <style>
+        /* ===== GOOGLE FONTS ===== */
+        @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=Poppins:wght@300;400;500;600;700&family=Source+Code+Pro:wght@400;500&display=swap');
+
+        /* ===== ROOT VARIABLES ===== */
+        :root {
+            --primary: #1a237e;
+            --primary-light: #3949ab;
+            --accent: #ff6f00;
+            --accent-light: #ffb300;
+            --dark: #0d1117;
+            --light: #f8f9fa;
+            --card-bg: #ffffff;
+            --gradient-1: linear-gradient(135deg, #1a237e 0%, #283593 50%, #3949ab 100%);
+            --gradient-2: linear-gradient(135deg, #ff6f00 0%, #ff8f00 50%, #ffb300 100%);
+            --gradient-3: linear-gradient(135deg, #0d1117 0%, #1a237e 100%);
+            --shadow: 0 10px 40px rgba(0,0,0,0.1);
+            --shadow-hover: 0 20px 60px rgba(0,0,0,0.15);
+        }
+
+        /* ===== RESET & BASE ===== */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: #f0f2f5;
+            color: #333;
+            line-height: 1.8;
+            overflow-x: hidden;
+        }
+
+        /* ===== NAVIGATION ===== */
+        .navbar {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(13, 17, 23, 0.95);
+            backdrop-filter: blur(20px);
+            padding: 15px 0;
+            z-index: 1000;
+            box-shadow: 0 2px 30px rgba(0,0,0,0.3);
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 30px;
+        }
+
+        .nav-logo {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #fff;
+        }
+
+        .nav-logo span {
+            color: var(--accent);
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 5px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .nav-links a {
+            color: #ccc;
+            text-decoration: none;
+            padding: 8px 16px;
+            border-radius: 25px;
+            font-size: 0.85rem;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+
+        .nav-links a:hover {
+            color: #fff;
+            background: var(--primary-light);
+        }
+
+        /* ===== COVER PAGE / HERO ===== */
+        .hero {
+            min-height: 100vh;
+            background: var(--gradient-3);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 120px 30px 80px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            width: 600px;
+            height: 600px;
+            background: radial-gradient(circle, rgba(255,111,0,0.15) 0%, transparent 70%);
+            top: -100px;
+            right: -100px;
+            border-radius: 50%;
+            animation: float 8s ease-in-out infinite;
+        }
+
+        .hero::after {
+            content: '';
+            position: absolute;
+            width: 400px;
+            height: 400px;
+            background: radial-gradient(circle, rgba(57,73,171,0.2) 0%, transparent 70%);
+            bottom: -50px;
+            left: -50px;
+            border-radius: 50%;
+            animation: float 6s ease-in-out infinite reverse;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px) scale(1); }
+            50% { transform: translateY(-30px) scale(1.05); }
+        }
+
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(40px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes slideInLeft {
+            from { opacity: 0; transform: translateX(-50px); }
+            to { opacity: 1; transform: translateX(0); }
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            animation: fadeInUp 1s ease-out;
+        }
+
+        .school-badge {
+            display: inline-block;
+            background: rgba(255,255,255,0.1);
+            border: 2px solid rgba(255,255,255,0.2);
+            padding: 12px 35px;
+            border-radius: 50px;
+            margin-bottom: 30px;
+            backdrop-filter: blur(10px);
+        }
+
+        .school-badge img {
+            width: 30px;
+            vertical-align: middle;
+            margin-right: 8px;
+        }
+
+        .school-badge span {
+            color: #fff;
+            font-size: 1rem;
+            font-weight: 600;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+        }
+
+        .hero h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 3.5rem;
+            font-weight: 900;
+            color: #fff;
+            margin-bottom: 10px;
+            line-height: 1.2;
+        }
+
+        .hero h1 span {
+            display: block;
+            background: var(--gradient-2);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .hero-subtitle {
+            font-size: 1.3rem;
+            color: #b0bec5;
+            margin-bottom: 15px;
+            font-weight: 300;
+        }
+
+        .hero-subject {
+            font-size: 1.1rem;
+            color: var(--accent-light);
+            font-weight: 600;
+            margin-bottom: 40px;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+        }
+
+        .student-info-card {
+            background: rgba(255,255,255,0.05);
+            border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 20px;
+            padding: 40px;
+            max-width: 600px;
+            margin: 0 auto 40px;
+            backdrop-filter: blur(20px);
+        }
+
+        .info-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            text-align: left;
+        }
+
+        .info-item {
+            padding: 15px 20px;
+            background: rgba(255,255,255,0.05);
+            border-radius: 12px;
+            border-left: 3px solid var(--accent);
+        }
+
+        .info-item.full-width {
+            grid-column: 1 / -1;
+        }
+
+        .info-label {
+            font-size: 0.7rem;
+            color: #90a4ae;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            font-weight: 600;
+        }
+
+        .info-value {
+            font-size: 1.05rem;
+            color: #fff;
+            font-weight: 600;
+        }
+
+        .scroll-indicator {
+            position: absolute;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 2;
+        }
+
+        .scroll-indicator a {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            color: rgba(255,255,255,0.5);
+            text-decoration: none;
+            font-size: 0.75rem;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+        }
+
+        .scroll-arrow {
+            width: 30px;
+            height: 50px;
+            border: 2px solid rgba(255,255,255,0.3);
+            border-radius: 15px;
+            position: relative;
+            margin-bottom: 10px;
+        }
+
+        .scroll-arrow::before {
+            content: '';
+            width: 6px;
+            height: 6px;
+            background: var(--accent);
+            border-radius: 50%;
+            position: absolute;
+            top: 8px;
+            left: 50%;
+            transform: translateX(-50%);
+            animation: scrollDown 2s ease-in-out infinite;
+        }
+
+        @keyframes scrollDown {
+            0% { top: 8px; opacity: 1; }
+            100% { top: 32px; opacity: 0; }
+        }
+
+        /* ===== SECTIONS ===== */
+        .section {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 80px 30px;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+
+        .section-number {
+            display: inline-block;
+            background: var(--gradient-2);
+            color: #fff;
+            width: 45px;
+            height: 45px;
+            line-height: 45px;
+            border-radius: 50%;
+            font-weight: 700;
+            font-size: 1.1rem;
+            margin-bottom: 15px;
+        }
+
+        .section-header h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.2rem;
+            font-weight: 700;
+            color: var(--primary);
+            margin-bottom: 10px;
+        }
+
+        .section-header p {
+            color: #777;
+            font-size: 1rem;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .section-divider {
+            width: 60px;
+            height: 4px;
+            background: var(--gradient-2);
+            margin: 15px auto 0;
+            border-radius: 2px;
+        }
+
+        /* ===== CARDS ===== */
+        .card {
+            background: var(--card-bg);
+            border-radius: 20px;
+            padding: 40px;
+            box-shadow: var(--shadow);
+            margin-bottom: 30px;
+            border: 1px solid rgba(0,0,0,0.05);
+            transition: all 0.3s ease;
+        }
+
+        .card:hover {
+            box-shadow: var(--shadow-hover);
+            transform: translateY(-3px);
+        }
+
+        .card h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.5rem;
+            color: var(--primary);
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .card h3 .icon {
+            font-size: 1.8rem;
+        }
+
+        .card p, .card li {
+            color: #555;
+            font-size: 0.95rem;
+            line-height: 1.9;
+        }
+
+        .card ul {
+            padding-left: 20px;
+        }
+
+        .card ul li {
+            margin-bottom: 10px;
+            position: relative;
+        }
+
+        .card ul li::marker {
+            color: var(--accent);
+        }
+
+        .highlight {
+            background: var(--gradient-2);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            font-weight: 700;
+        }
+
+        .badge {
+            display: inline-block;
+            padding: 4px 14px;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            margin: 3px;
+        }
+
+        .badge-blue {
+            background: #e3f2fd;
+            color: #1565c0;
+        }
+
+        .badge-orange {
+            background: #fff3e0;
+            color: #e65100;
+        }
+
+        .badge-green {
+            background: #e8f5e9;
+            color: #2e7d32;
+        }
+
+        .badge-purple {
+            background: #f3e5f5;
+            color: #7b1fa2;
+        }
+
+        /* ===== TOOLS GRID ===== */
+        .tools-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 25px;
+            margin-top: 20px;
+        }
+
+        .tool-card {
+            background: var(--card-bg);
+            border-radius: 20px;
+            padding: 35px;
+            box-shadow: var(--shadow);
+            border: 1px solid rgba(0,0,0,0.05);
+            text-align: center;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .tool-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: var(--gradient-2);
+        }
+
+        .tool-card:hover {
+            transform: translateY(-8px);
+            box-shadow: var(--shadow-hover);
+        }
+
+        .tool-icon {
+            font-size: 3rem;
+            margin-bottom: 15px;
+            display: block;
+        }
+
+        .tool-card h4 {
+            font-size: 1.2rem;
+            color: var(--primary);
+            margin-bottom: 10px;
+            font-weight: 700;
+        }
+
+        .tool-card p {
+            color: #666;
+            font-size: 0.88rem;
+            line-height: 1.7;
+        }
+
+        /* ===== HOW IT WORKS ===== */
+        .steps-container {
+            position: relative;
+        }
+
+        .step {
+            display: flex;
+            gap: 30px;
+            margin-bottom: 35px;
+            align-items: flex-start;
+        }
+
+        .step-number-circle {
+            min-width: 60px;
+            height: 60px;
+            background: var(--gradient-1);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #fff;
+            font-weight: 700;
+            font-size: 1.3rem;
+            box-shadow: 0 5px 20px rgba(26,35,126,0.3);
+        }
+
+        .step-content {
+            background: var(--card-bg);
+            border-radius: 16px;
+            padding: 25px 30px;
+            box-shadow: var(--shadow);
+            flex: 1;
+            border: 1px solid rgba(0,0,0,0.05);
+        }
+
+        .step-content h4 {
+            font-size: 1.1rem;
+            color: var(--primary);
+            margin-bottom: 8px;
+        }
+
+        .step-content p {
+            color: #666;
+            font-size: 0.9rem;
+        }
+
+        /* ===== CODE BLOCK ===== */
+        .code-container {
+            background: #0d1117;
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            margin: 25px 0;
+        }
+
+        .code-header {
+            background: #161b22;
+            padding: 12px 20px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .code-dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+        }
+
+        .code-dot.red { background: #ff5f57; }
+        .code-dot.yellow { background: #ffbd2e; }
+        .code-dot.green { background: #28ca41; }
+
+        .code-filename {
+            color: #8b949e;
+            font-size: 0.8rem;
+            margin-left: 10px;
+            font-family: 'Source Code Pro', monospace;
+        }
+
+        .code-block {
+            padding: 25px;
+            overflow-x: auto;
+            max-height: 500px;
+            overflow-y: auto;
+        }
+
+        .code-block pre {
+            margin: 0;
+            font-family: 'Source Code Pro', monospace;
+            font-size: 0.82rem;
+            line-height: 1.8;
+            color: #e6edf3;
+        }
+
+        .code-block .comment { color: #8b949e; }
+        .code-block .keyword { color: #ff7b72; }
+        .code-block .string { color: #a5d6ff; }
+        .code-block .function { color: #d2a8ff; }
+        .code-block .builtin { color: #79c0ff; }
+        .code-block .decorator { color: #ffa657; }
+
+        /* ===== OUTPUT BOX ===== */
+        .output-box {
+            background: #1a1a2e;
+            border-radius: 16px;
+            padding: 30px;
+            margin: 25px 0;
+            box-shadow: var(--shadow);
+        }
+
+        .output-box h4 {
+            color: #28ca41;
+            font-family: 'Source Code Pro', monospace;
+            font-size: 0.85rem;
+            margin-bottom: 15px;
+            letter-spacing: 1px;
+        }
+
+        .output-box pre {
+            color: #b0bec5;
+            font-family: 'Source Code Pro', monospace;
+            font-size: 0.82rem;
+            line-height: 1.9;
+            white-space: pre-wrap;
+        }
+
+        .output-box .user-input {
+            color: #ffb300;
+        }
+
+        .output-box .success {
+            color: #28ca41;
+        }
+
+        /* ===== TABLE ===== */
+        .styled-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: var(--shadow);
+        }
+
+        .styled-table thead {
+            background: var(--gradient-1);
+        }
+
+        .styled-table th {
+            color: #fff;
+            padding: 15px 20px;
+            font-weight: 600;
+            font-size: 0.9rem;
+            text-align: left;
+            letter-spacing: 0.5px;
+        }
+
+        .styled-table td {
+            padding: 14px 20px;
+            font-size: 0.88rem;
+            color: #555;
+            border-bottom: 1px solid #f0f0f0;
+        }
+
+        .styled-table tbody tr {
+            background: #fff;
+            transition: all 0.2s ease;
+        }
+
+        .styled-table tbody tr:hover {
+            background: #f8f9ff;
+        }
+
+        .styled-table tbody tr:nth-child(even) {
+            background: #fafafa;
+        }
+
+        /* ===== CERTIFICATE SECTION ===== */
+        .certificate {
+            background: var(--card-bg);
+            border: 3px double var(--primary);
+            border-radius: 20px;
+            padding: 50px 40px;
+            text-align: center;
+            position: relative;
+            box-shadow: var(--shadow);
+        }
+
+        .certificate::before {
+            content: '';
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            right: 10px;
+            bottom: 10px;
+            border: 1px solid rgba(26,35,126,0.2);
+            border-radius: 14px;
+            pointer-events: none;
+        }
+
+        .certificate h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 2rem;
+            color: var(--primary);
+            margin-bottom: 25px;
+        }
+
+        .certificate p {
+            color: #555;
+            font-size: 1rem;
+            line-height: 2;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .signature-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 30px;
+            margin-top: 50px;
+            text-align: center;
+        }
+
+        .signature-item {
+            padding-top: 15px;
+            border-top: 2px solid #333;
+        }
+
+        .signature-name {
+            font-weight: 700;
+            color: var(--primary);
+            font-size: 0.95rem;
+        }
+
+        .signature-role {
+            font-size: 0.8rem;
+            color: #888;
+        }
+
+        /* ===== ACKNOWLEDGEMENT ===== */
+        .acknowledgement-text {
+            font-size: 1.05rem;
+            color: #555;
+            line-height: 2.2;
+            text-align: justify;
+            max-width: 700px;
+            margin: 0 auto;
+            font-style: italic;
+            padding: 30px;
+            background: #fafafa;
+            border-radius: 16px;
+            border-left: 5px solid var(--accent);
+        }
+
+        /* ===== FLOWCHART ===== */
+        .flowchart {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 0;
+            margin: 30px 0;
+        }
+
+        .flow-box {
+            padding: 15px 35px;
+            border-radius: 12px;
+            font-weight: 600;
+            font-size: 0.9rem;
+            text-align: center;
+            min-width: 250px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+
+        .flow-start {
+            background: var(--gradient-1);
+            color: #fff;
+            border-radius: 50px;
+        }
+
+        .flow-process {
+            background: #e3f2fd;
+            color: #1565c0;
+            border: 2px solid #90caf9;
+        }
+
+        .flow-decision {
+            background: #fff3e0;
+            color: #e65100;
+            border: 2px solid #ffcc80;
+            transform: rotate(0deg);
+        }
+
+        .flow-end {
+            background: #e8f5e9;
+            color: #2e7d32;
+            border-radius: 50px;
+            border: 2px solid #a5d6a7;
+        }
+
+        .flow-arrow {
+            font-size: 1.8rem;
+            color: #aaa;
+            line-height: 1;
+            padding: 5px 0;
+        }
+
+        /* ===== CONCLUSION ===== */
+        .conclusion-box {
+            background: var(--gradient-3);
+            border-radius: 20px;
+            padding: 50px 40px;
+            color: #fff;
+            text-align: center;
+        }
+
+        .conclusion-box h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.8rem;
+            margin-bottom: 20px;
+        }
+
+        .conclusion-box p {
+            color: #b0bec5;
+            font-size: 1rem;
+            line-height: 2;
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        /* ===== FOOTER ===== */
+        .footer {
+            background: var(--dark);
+            padding: 40px 30px;
+            text-align: center;
+            color: #666;
+        }
+
+        .footer p {
+            font-size: 0.85rem;
+        }
+
+        .footer .name-highlight {
+            color: var(--accent);
+            font-weight: 600;
+        }
+
+        .footer .heart {
+            color: #ff5252;
+            animation: pulse 1.5s infinite;
+            display: inline-block;
+        }
+
+        /* ===== BIBLIOGRAPHY ===== */
+        .bib-list {
+            list-style: none;
+            padding: 0;
+        }
+
+        .bib-list li {
+            padding: 15px 20px;
+            background: #fafafa;
+            margin-bottom: 10px;
+            border-radius: 10px;
+            border-left: 4px solid var(--accent);
+            font-size: 0.9rem;
+            color: #555;
+        }
+
+        .bib-list li strong {
+            color: var(--primary);
+        }
+
+        /* ===== BACK TO TOP ===== */
+        .back-to-top {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 50px;
+            height: 50px;
+            background: var(--gradient-2);
+            color: #fff;
+            border: none;
+            border-radius: 50%;
+            font-size: 1.5rem;
+            cursor: pointer;
+            box-shadow: 0 5px 20px rgba(255,111,0,0.4);
+            z-index: 999;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        .back-to-top:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(255,111,0,0.5);
+        }
+
+        /* ===== RESPONSIVE ===== */
+        @media (max-width: 768px) {
+            .hero h1 { font-size: 2.2rem; }
+            .info-grid { grid-template-columns: 1fr; }
+            .nav-links { display: none; }
+            .signature-grid { grid-template-columns: 1fr; gap: 30px; }
+            .step { flex-direction: column; align-items: center; text-align: center; }
+            .section { padding: 50px 20px; }
+            .student-info-card { padding: 25px; }
+            .card { padding: 25px; }
+            .certificate { padding: 30px 20px; }
+            .tools-grid { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- ===== NAVIGATION ===== -->
+    <nav class="navbar" id="top">
+        <div class="nav-container">
+            <div class="nav-logo">Harsh<span>.</span>py</div>
+            <ul class="nav-links">
+                <li><a href="#home">Home</a></li>
+                <li><a href="#certificate">Certificate</a></li>
+                <li><a href="#acknowledgement">Acknowledgement</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#tools">Tools</a></li>
+                <li><a href="#working">Working</a></li>
+                <li><a href="#code">Code</a></li>
+                <li><a href="#output">Output</a></li>
+                <li><a href="#conclusion">Conclusion</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- ===== COVER PAGE / HERO ===== -->
+    <section class="hero" id="home">
+        <div class="hero-content">
+            <div class="school-badge">
+                <span>🏫 Maples Academy Khatauli</span>
+            </div>
+
+            <h1>
+                Computer Science
+                <span>Python Project</span>
+            </h1>
+            <p class="hero-subtitle">Text-to-Speech Program using Edge TTS</p>
+            <p class="hero-subject">📘 Session 2024–25</p>
+
+            <div class="student-info-card">
+                <div class="info-grid">
+                    <div class="info-item">
+                        <div class="info-label">Student Name</div>
+                        <div class="info-value">Harsh</div>
+                    </div>
+                    <div class="info-item">
+                        <div class="info-label">Class & Section</div>
+                        <div class="info-value">XI – A</div>
+                    </div>
+                    <div class="info-item">
+                        <div class="info-label">Roll Number</div>
+                        <div class="info-value">17</div>
+                    </div>
+                    <div class="info-item">
+                        <div class="info-label">Subject</div>
+                        <div class="info-value">Computer Science (083)</div>
+                    </div>
+                    <div class="info-item full-width">
+                        <div class="info-label">Submitted To</div>
+                        <div class="info-value">Er. Pankaj Sir (PGT Computer Science)</div>
+                    </div>
+                    <div class="info-item full-width">
+                        <div class="info-label">Principal</div>
+                        <div class="info-value">Mrs. Garima Singh</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="scroll-indicator">
+            <a href="#certificate">
+                <div class="scroll-arrow"></div>
+                Scroll Down
+            </a>
+        </div>
+    </section>
+
+    <!-- ===== CERTIFICATE ===== -->
+    <section class="section" id="certificate">
+        <div class="section-header">
+            <div class="section-number">1</div>
+            <h2>Certificate</h2>
+            <div class="section-divider"></div>
+        </div>
+
+        <div class="certificate">
+            <h3>📜 Certificate</h3>
+            <p>
+                This is to certify that <strong>Harsh</strong>, a student of
+                <strong>Class XI-A</strong>, Roll No. <strong>17</strong> of
+                <strong>Maples Academy Khatauli</strong> has successfully completed
+                the Computer Science project titled
+                <strong>"Text-to-Speech Program using Edge TTS"</strong>
+                during the academic session <strong>2024–25</strong> under the guidance
+                of <strong>Er. Pankaj Sir</strong>.
+                <br><br>
+                This project has been developed as per the CBSE guidelines for the
+                Class XI practical examination.
+            </p>
+
+            <div class="signature-grid">
+                <div class="signature-item">
+                    <div class="signature-name">Harsh</div>
+                    <div class="signature-role">Student</div>
+                </div>
+                <div class="signature-item">
+                    <div class="signature-name">Er. Pankaj Sir</div>
+                    <div class="signature-role">Subject Teacher</div>
+                </div>
+                <div class="signature-item">
+                    <div class="signature-name">Mrs. Garima Singh</div>
+                    <div class="signature-role">Principal</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== ACKNOWLEDGEMENT ===== -->
+    <section class="section" id="acknowledgement" style="padding-top: 20px;">
+        <div class="section-header">
+            <div class="section-number">2</div>
+            <h2>Acknowledgement</h2>
+            <div class="section-divider"></div>
+        </div>
+
+        <div class="acknowledgement-text">
+            I would like to express my sincere gratitude to my Computer Science teacher,
+            <strong>Er. Pankaj Sir</strong>, for his invaluable guidance and constant
+            encouragement throughout this project. His expertise in Python programming
+            helped me understand the concepts deeply.
+            <br><br>
+            I am also thankful to our respected Principal,
+            <strong>Mrs. Garima Singh</strong>, for providing us with the necessary
+            facilities and a conducive learning environment at
+            <strong>Maples Academy Khatauli</strong>.
+            <br><br>
+            I extend my thanks to my parents and friends who supported and motivated
+            me during the completion of this project.
+            <br><br>
+            — <strong>Harsh</strong>, Class XI-A, Roll No. 17
+        </div>
+    </section>
+
+    <!-- ===== ABOUT THE PROJECT ===== -->
+    <section class="section" id="about" style="padding-top: 20px;">
+        <div class="section-header">
+            <div class="section-number">3</div>
+            <h2>About the Project</h2>
+            <p>Understanding what this project does and why it matters</p>
+            <div class="section-divider"></div>
+        </div>
+
+        <div class="card">
+            <h3><span class="icon">🎯</span> Project Overview</h3>
+            <p>
+                This project is a <strong>Text-to-Speech (TTS) application</strong>
+                built using Python. It takes text input from the user and converts it
+                into natural-sounding human speech using <strong>Microsoft Edge's
+                Neural AI voices</strong>.
+            </p>
+            <br>
+            <p>
+                The program supports <strong>multiple languages and voices</strong>
+                including Hindi (Male & Female) and English (Male & Female with
+                US & UK accents). Users can type any text — in Hindi or English —
+                choose their preferred voice, and hear the computer speak it out
+                loud with realistic human-like pronunciation.
+            </p>
+        </div>
+
+        <div class="card">
+            <h3><span class="icon">💡</span> Why This Project?</h3>
+            <ul>
+                <li><strong>Real-World Application:</strong> TTS technology is used in Google Assistant, Alexa, Siri, navigation apps, and accessibility tools for visually impaired people.</li>
+                <li><strong>AI & Cloud Computing:</strong> It demonstrates how cloud-based AI services can be accessed using Python.</li>
+                <li><strong>Multi-Language Support:</strong> The program supports both Hindi and English, making it relevant for Indian users.</li>
+                <li><strong>Interactive:</strong> It's not just a script — it takes user input and produces audible output.</li>
+            </ul>
+        </div>
+
+        <div class="card">
+            <h3><span class="icon">✨</span> Key Features</h3>
+            <ul>
+                <li>🔊 Converts any typed text into <strong>natural AI speech</strong></li>
+                <li>🇮🇳 Supports <strong>Hindi Male & Female</strong> voices</li>
+                <li>🇺🇸 Supports <strong>English US Male & Female</strong> voices</li>
+                <li>🇬🇧 Supports <strong>English UK Male & Female</strong> voices</li>
+                <li>🎛️ User-friendly <strong>menu-driven interface</strong></li>
+                <li>✅ <strong>Input validation</strong> — handles wrong inputs gracefully</li>
+                <li>🔁 Option to <strong>speak multiple texts</strong> without restarting</li>
+                <li>🧹 Automatic <strong>cleanup</strong> of temporary audio files</li>
+            </ul>
+        </div>
+    </section>
+
+    <!-- ===== TOOLS & TECHNOLOGIES ===== -->
+    <section class="section" id="tools" style="padding-top: 20px;">
+        <div class="section-header">
+            <div class="section-number">4</div>
+            <h2>Tools & Technologies Used</h2>
+            <p>Software, libraries, and technologies powering this project</p>
+            <div class="section-divider"></div>
+        </div>
+
+        <div class="tools-grid">
+            <div class="tool-card">
+                <span class="tool-icon">🐍</span>
+                <h4>Python 3</h4>
+                <p>The core programming language used. Python is known for its simplicity, readability, and vast library ecosystem. Version 3.8+ is required.</p>
+                <br>
+                <span class="badge badge-blue">Language</span>
+            </div>
+
+            <div class="tool-card">
+                <span class="tool-icon">🗣️</span>
+                <h4>Edge TTS</h4>
+                <p>A Python library that uses Microsoft Edge's online text-to-speech service. It provides free access to 300+ neural AI voices in 40+ languages.</p>
+                <br>
+                <span class="badge badge-orange">Library</span>
+            </div>
+
+            <div class="tool-card">
+                <span class="tool-icon">🎮</span>
+                <h4>Pygame</h4>
+                <p>A popular Python library for multimedia. Used here to play the generated MP3 audio file through the computer's speakers.</p>
+                <br>
+                <span class="badge badge-green">Library</span>
+            </div>
+
+            <div class="tool-card">
+                <span class="tool-icon">⚡</span>
+                <h4>Asyncio</h4>
+                <p>Python's built-in module for asynchronous programming. Required because Edge TTS communicates with Microsoft's servers over the internet.</p>
+                <br>
+                <span class="badge badge-purple">Module</span>
+            </div>
+
+            <div class="tool-card">
+                <span class="tool-icon">🖥️</span>
+                <h4>VS Code / IDLE</h4>
+                <p>The code editor used for writing and testing the Python code. Any IDE or text editor supporting Python can be used.</p>
+                <br>
+                <span class="badge badge-blue">IDE</span>
+            </div>
+
+            <div class="tool-card">
+                <span class="tool-icon">☁️</span>
+                <h4>Microsoft Azure AI</h4>
+                <p>The cloud service that processes the text and generates speech using neural network models. Edge TTS connects to this service automatically.</p>
+                <br>
+                <span class="badge badge-orange">Cloud Service</span>
+            </div>
+        </div>
+
+        <div class="card" style="margin-top: 30px;">
+            <h3><span class="icon">📦</span> Installation Commands</h3>
+            <p>Before running the project, these libraries must be installed using pip (Python's package manager):</p>
+            <div class="code-container">
+                <div class="code-header">
+                    <div class="code-dot red"></div>
+                    <div class="code-dot yellow"></div>
+                    <div class="code-dot green"></div>
+                    <span class="code-filename">Terminal / Command Prompt</span>
+                </div>
+                <div class="code-block">
+<pre>
+<span class="comment"># Install Edge TTS library</span>
+<span class="builtin">pip install</span> edge-tts
+
+<span class="comment"># Install Pygame for audio playback</span>
+<span class="builtin">pip install</span> pygame
+</pre>
+                </div>
+            </div>
+        </div>
+
+        <!-- Python Concepts Table -->
+        <div class="card">
+            <h3><span class="icon">📚</span> Python Concepts Used</h3>
+            <table class="styled-table">
+                <thead>
+                    <tr>
+                        <th>Concept</th>
+                        <th>Where Used</th>
+                        <th>Purpose</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>Dictionary</strong></td>
+                        <td>VOICES variable</td>
+                        <td>Store voice names & IDs as key-value pairs</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Functions</strong></td>
+                        <td>generate_speech(), play_audio(), main()</td>
+                        <td>Modular & reusable code blocks</td>
+                    </tr>
+                    <tr>
+                        <td><strong>While Loop</strong></td>
+                        <td>Main menu & input validation</td>
+                        <td>Repeat until valid input or user exits</td>
+                    </tr>
+                    <tr>
+                        <td><strong>For Loop</strong></td>
+                        <td>Displaying voice options</td>
+                        <td>Iterate over dictionary items</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Conditional Statements</strong></td>
+                        <td>Input validation, menu choices</td>
+                        <td>Decision making in program flow</td>
+                    </tr>
+                    <tr>
+                        <td><strong>String Methods</strong></td>
+                        <td>.strip(), .lower()</td>
+                        <td>Clean and normalize user input</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Async/Await</strong></td>
+                        <td>generate_speech() function</td>
+                        <td>Handle network communication efficiently</td>
+                    </tr>
+                    <tr>
+                        <td><strong>File Handling</strong></td>
+                        <td>os.path.exists(), os.remove()</td>
+                        <td>Manage temporary MP3 file</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Modules/Imports</strong></td>
+                        <td>edge_tts, pygame, asyncio, os, time</td>
+                        <td>Use external functionality</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </section>
+
+    <!-- ===== HOW IT WORKS ===== -->
+    <section class="section" id="working" style="padding-top: 20px;">
+        <div class="section-header">
+            <div class="section-number">5</div>
+            <h2>How It Works</h2>
+            <p>Step-by-step flow of the program</p>
+            <div class="section-divider"></div>
+        </div>
+
+        <!-- FLOWCHART -->
+        <div class="card">
+            <h3><span class="icon">📊</span> Program Flowchart</h3>
+            <div class="flowchart">
+                <div class="flow-box flow-start">▶ START</div>
+                <div class="flow-arrow">↓</div>
+                <div class="flow-box flow-process">Display Welcome Message & Voice Menu</div>
+                <div class="flow-arrow">↓</div>
+                <div class="flow-box flow-process">User Selects Voice (1-6)</div>
+                <div class="flow-arrow">↓</div>
+                <div class="flow-box flow-decision">❓ Valid Choice?</div>
+                <div class="flow-arrow">↓ Yes</div>
+                <div class="flow-box flow-process">User Enters Text to Speak</div>
+                <div class="flow-arrow">↓</div>
+                <div class="flow-box flow-process">Send Text + Voice to Microsoft Edge TTS API</div>
+                <div class="flow-arrow">↓</div>
+                <div class="flow-box flow-process">Receive MP3 Audio &amp; Save to File</div>
+                <div class="flow-arrow">↓</div>
+                <div class="flow-box flow-process">🔊 Play Audio using Pygame</div>
+                <div class="flow-arrow">↓</div>
+                <div class="flow-box flow-decision">❓ Speak Again?</div>
+                <div class="flow-arrow">↓ No</div>
+                <div class="flow-box flow-process">Delete Temporary MP3 File</div>
+                <div class="flow-arrow">↓</div>
+                <div class="flow-box flow-end">⏹ END</div>
+            </div>
+        </div>
+
+        <!-- STEPS -->
+        <div class="steps-container">
+            <div class="step">
+                <div class="step-number-circle">1</div>
+                <div class="step-content">
+                    <h4>Program Starts & Shows Menu</h4>
+                    <p>The program displays a welcome message and shows 6 voice options — Hindi Male/Female, English US Male/Female, English UK Male/Female. User picks one by entering a number.</p>
+                </div>
+            </div>
+
+            <div class="step">
+                <div class="step-number-circle">2</div>
+                <div class="step-content">
+                    <h4>User Enters Text</h4>
+                    <p>The user types any text they want to hear. It can be in Hindi (using Hindi keyboard) or English. The program validates that the text is not empty.</p>
+                </div>
+            </div>
+
+            <div class="step">
+                <div class="step-number-circle">3</div>
+                <div class="step-content">
+                    <h4>Text Sent to Microsoft's Cloud</h4>
+                    <p>The <code>edge_tts</code> library sends the text and selected voice to Microsoft's Azure cloud servers over the internet. The AI neural network processes the text.</p>
+                </div>
+            </div>
+
+            <div class="step">
+                <div class="step-number-circle">4</div>
+                <div class="step-content">
+                    <h4>AI Generates Speech</h4>
+                    <p>Microsoft's neural TTS engine converts the text into natural-sounding speech. It understands pronunciation, intonation, pauses, and emotions. The result is sent back as an MP3 file.</p>
+                </div>
+            </div>
+
+            <div class="step">
+                <div class="step-number-circle">5</div>
+                <div class="step-content">
+                    <h4>Audio is Played</h4>
+                    <p>The MP3 file is saved locally and played through the computer's speakers using the <code>pygame.mixer</code> module. The program waits until the audio finishes playing.</p>
+                </div>
+            </div>
+
+            <div class="step">
+                <div class="step-number-circle">6</div>
+                <div class="step-content">
+                    <h4>Repeat or Exit</h4>
+                    <p>The user can choose to speak another text or exit. On exit, the temporary MP3 file is automatically deleted to keep the system clean.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== SOURCE CODE ===== -->
+    <section class="section" id="code" style="padding-top: 20px;">
+        <div class="section-header">
+            <div class="section-number">6</div>
+            <h2>Source Code</h2>
+            <p>Complete Python source code of the project</p>
+            <div class="section-divider"></div>
+        </div>
+
+        <div class="code-container">
+            <div class="code-header">
+                <div class="code-dot red"></div>
+                <div class="code-dot yellow"></div>
+                <div class="code-dot green"></div>
+                <span class="code-filename">text_to_speech.py</span>
+            </div>
+            <div class="code-block">
+<pre>
+<span class="comment"># ==========================================</span>
+<span class="comment">#   TEXT-TO-SPEECH PROGRAM (Edge TTS)</span>
+<span class="comment">#   CBSE Class 11 - Computer Science Project</span>
+<span class="comment">#   Made by: Harsh | Class XI-A | Roll No: 17</span>
+<span class="comment"># ==========================================</span>
+
+<span class="keyword">import</span> edge_tts
+<span class="keyword">import</span> asyncio
+<span class="keyword">import</span> pygame
+<span class="keyword">import</span> time
+<span class="keyword">import</span> os
+
+<span class="comment"># ---------- AVAILABLE VOICES ----------</span>
+VOICES = {
+    <span class="string">"1"</span>: (<span class="string">"Hindi Female"</span>,      <span class="string">"hi-IN-SwaraNeural"</span>),
+    <span class="string">"2"</span>: (<span class="string">"Hindi Male"</span>,        <span class="string">"hi-IN-MadhurNeural"</span>),
+    <span class="string">"3"</span>: (<span class="string">"English Female US"</span>, <span class="string">"en-US-JennyNeural"</span>),
+    <span class="string">"4"</span>: (<span class="string">"English Male US"</span>,   <span class="string">"en-US-GuyNeural"</span>),
+    <span class="string">"5"</span>: (<span class="string">"English Female UK"</span>, <span class="string">"en-GB-SoniaNeural"</span>),
+    <span class="string">"6"</span>: (<span class="string">"English Male UK"</span>,   <span class="string">"en-GB-RyanNeural"</span>),
+}
+
+OUTPUT_FILE = <span class="string">"speech.mp3"</span>
+
+
+<span class="comment"># ---------- GENERATE SPEECH ----------</span>
+<span class="keyword">async def</span> <span class="function">generate_speech</span>(text, voice):
+    communicate = edge_tts.<span class="function">Communicate</span>(text, voice)
+    <span class="keyword">await</span> communicate.<span class="function">save</span>(OUTPUT_FILE)
+
+
+<span class="comment"># ---------- PLAY AUDIO ----------</span>
+<span class="keyword">def</span> <span class="function">play_audio</span>():
+    pygame.mixer.<span class="function">init</span>()
+    pygame.mixer.music.<span class="function">load</span>(OUTPUT_FILE)
+    pygame.mixer.music.<span class="function">play</span>()
+    <span class="keyword">while</span> pygame.mixer.music.<span class="function">get_busy</span>():
+        time.<span class="function">sleep</span>(<span class="string">0.1</span>)
+    pygame.mixer.music.<span class="function">unload</span>()
+    pygame.mixer.<span class="function">quit</span>()
+
+
+<span class="comment"># ---------- MAIN PROGRAM ----------</span>
+<span class="keyword">def</span> <span class="function">main</span>():
+    <span class="builtin">print</span>()
+    <span class="builtin">print</span>(<span class="string">"  "</span> + <span class="string">"="</span> * 40)
+    <span class="builtin">print</span>(<span class="string">"      TEXT  TO  SPEECH  PROGRAM"</span>)
+    <span class="builtin">print</span>(<span class="string">"      Powered by Microsoft Edge AI"</span>)
+    <span class="builtin">print</span>(<span class="string">"  "</span> + <span class="string">"="</span> * 40)
+
+    <span class="comment"># Show voice options</span>
+    <span class="builtin">print</span>(<span class="string">"\n  Available Voices:"</span>)
+    <span class="builtin">print</span>(<span class="string">"  "</span> + <span class="string">"-"</span> * 35)
+    <span class="keyword">for</span> key, (name, _) <span class="keyword">in</span> VOICES.<span class="function">items</span>():
+        <span class="builtin">print</span>(<span class="string">f"    {key}. {name}"</span>)
+    <span class="builtin">print</span>(<span class="string">"  "</span> + <span class="string">"-"</span> * 35)
+
+    <span class="keyword">while</span> <span class="builtin">True</span>:
+
+        <span class="comment"># --- Choose Voice ---</span>
+        <span class="keyword">while</span> <span class="builtin">True</span>:
+            choice = <span class="builtin">input</span>(<span class="string">"\n  Choose voice (1-6): "</span>).<span class="function">strip</span>()
+            <span class="keyword">if</span> choice <span class="keyword">in</span> VOICES:
+                <span class="keyword">break</span>
+            <span class="builtin">print</span>(<span class="string">"  Invalid! Enter 1 to 6."</span>)
+
+        voice_name, voice_id = VOICES[choice]
+
+        <span class="comment"># --- Enter Text ---</span>
+        text = <span class="builtin">input</span>(<span class="string">"  Enter text to speak: "</span>).<span class="function">strip</span>()
+        <span class="keyword">if not</span> text:
+            <span class="builtin">print</span>(<span class="string">"  Text cannot be empty!"</span>)
+            <span class="keyword">continue</span>
+
+        <span class="comment"># --- Generate & Play ---</span>
+        <span class="builtin">print</span>(<span class="string">f"\n  Generating speech in [{voice_name}]..."</span>)
+        asyncio.<span class="function">run</span>(<span class="function">generate_speech</span>(text, voice_id))
+
+        <span class="builtin">print</span>(<span class="string">"  Playing audio... 🔊"</span>)
+        <span class="function">play_audio</span>()
+        <span class="builtin">print</span>(<span class="string">"  Done! ✅"</span>)
+
+        <span class="comment"># --- Play Again? ---</span>
+        again = <span class="builtin">input</span>(<span class="string">"\n  Speak again? (y/n): "</span>).<span class="function">lower</span>()
+        <span class="keyword">if</span> again != <span class="string">"y"</span>:
+            <span class="keyword">break</span>
+
+    <span class="comment"># Cleanup temp file</span>
+    <span class="keyword">if</span> os.path.<span class="function">exists</span>(OUTPUT_FILE):
+        os.<span class="function">remove</span>(OUTPUT_FILE)
+
+    <span class="builtin">print</span>(<span class="string">"\n  Thanks for using! Goodbye! 👋\n"</span>)
+
+
+<span class="comment"># --- RUN ---</span>
+<span class="function">main</span>()
+</pre>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== OUTPUT ===== -->
+    <section class="section" id="output" style="padding-top: 20px;">
+        <div class="section-header">
+            <div class="section-number">7</div>
+            <h2>Output</h2>
+            <p>Sample output of the program execution</p>
+            <div class="section-divider"></div>
+        </div>
+
+        <div class="output-box">
+            <h4>▶ OUTPUT — Run 1 (Hindi Female Voice)</h4>
+<pre>
+  ========================================
+      TEXT  TO  SPEECH  PROGRAM
+      Powered by Microsoft Edge AI
+  ========================================
+
+  Available Voices:
+  -----------------------------------
+    1. Hindi Female
+    2. Hindi Male
+    3. English Female US
+    4. English Male US
+    5. English Female UK
+    6. English Male UK
+  -----------------------------------
+
+  Choose voice (1-6): <span class="user-input">1</span>
+  Enter text to speak: <span class="user-input">नमस्ते, मैं हर्ष हूँ, कक्षा ग्यारहवीं का छात्र</span>
+
+  Generating speech in [Hindi Female]...
+  Playing audio... 🔊
+  <span class="success">Done! ✅</span>
+
+  Speak again? (y/n): <span class="user-input">y</span>
+</pre>
+        </div>
+
+        <div class="output-box">
+            <h4>▶ OUTPUT — Run 2 (English Male Voice)</h4>
+<pre>
+  Choose voice (1-6): <span class="user-input">4</span>
+  Enter text to speak: <span class="user-input">Hello! This is my Computer Science project for Class 11.</span>
+
+  Generating speech in [English Male US]...
+  Playing audio... 🔊
+  <span class="success">Done! ✅</span>
+
+  Speak again? (y/n): <span class="user-input">n</span>
+
+  Thanks for using! Goodbye! 👋
+</pre>
+        </div>
+
+        <div class="card">
+            <h3><span class="icon">🔊</span> What Happens During Output</h3>
+            <ul>
+                <li>The program displays a <strong>menu</strong> with 6 voice options.</li>
+                <li>After the user types text and selects a voice, the program <strong>connects to Microsoft's server</strong> over the internet.</li>
+                <li>Within 2-3 seconds, a <strong>natural AI voice speaks the text</strong> through the computer's speakers.</li>
+                <li>The voice sounds <strong>very human-like</strong> — with proper pronunciation, intonation, and pauses.</li>
+                <li>Hindi text is spoken in <strong>perfect Hindi</strong>, and English text in clear English.</li>
+            </ul>
+        </div>
+    </section>
+
+    <!-- ===== ADVANTAGES & LIMITATIONS ===== -->
+    <section class="section" style="padding-top: 20px;">
+        <div class="section-header">
+            <div class="section-number">8</div>
+            <h2>Advantages & Limitations</h2>
+            <div class="section-divider"></div>
+        </div>
+
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 25px;">
+            <div class="card" style="border-top: 4px solid #28ca41;">
+                <h3><span class="icon">✅</span> Advantages</h3>
+                <ul>
+                    <li>Completely <strong>free</strong> — no API key or payment needed</li>
+                    <li>Very <strong>natural sounding</strong> AI neural voices</li>
+                    <li>Supports <strong>Hindi + English</strong> with multiple accents</li>
+                    <li>Simple and <strong>easy to use</strong> menu interface</li>
+                    <li>Useful for <strong>visually impaired</strong> people</li>
+                    <li>Can be used for <strong>language learning</strong></li>
+                    <li>Code is <strong>short and readable</strong></li>
+                </ul>
+            </div>
+
+            <div class="card" style="border-top: 4px solid #ff5252;">
+                <h3><span class="icon">⚠️</span> Limitations</h3>
+                <ul>
+                    <li>Requires <strong>internet connection</strong> to work</li>
+                    <li>Depends on <strong>Microsoft's servers</strong> being available</li>
+                    <li>Cannot work <strong>offline</strong></li>
+                    <li>Very long texts may take <strong>more time</strong> to process</li>
+                    <li>Audio quality depends on <strong>internet speed</strong></li>
+                    <li>Limited to voices provided by Microsoft Edge</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== FUTURE ENHANCEMENTS ===== -->
+    <section class="section" style="padding-top: 20px;">
+        <div class="section-header">
+            <div class="section-number">9</div>
+            <h2>Future Enhancements</h2>
+            <div class="section-divider"></div>
+        </div>
+
+        <div class="card">
+            <h3><span class="icon">🚀</span> Possible Improvements</h3>
+            <ul>
+                <li>🖥️ Add a <strong>GUI (Graphical User Interface)</strong> using Tkinter for a more visual experience.</li>
+                <li>💾 Add option to <strong>save the audio as MP3/WAV file</strong> for later use.</li>
+                <li>📄 Add <strong>file reading support</strong> — read text from a .txt file and speak it.</li>
+                <li>🎚️ Allow user to <strong>control speed and pitch</strong> of the voice.</li>
+                <li>🌐 Add support for more languages like <strong>Tamil, Bengali, Marathi</strong>, etc.</li>
+                <li>📱 Convert into a <strong>web application</strong> using Flask or Django.</li>
+                <li>🎤 Add <strong>Speech-to-Text</strong> feature (reverse functionality).</li>
+            </ul>
+        </div>
+    </section>
+
+    <!-- ===== CONCLUSION ===== -->
+    <section class="section" id="conclusion" style="padding-top: 20px;">
+        <div class="section-header">
+            <div class="section-number">10</div>
+            <h2>Conclusion</h2>
+            <div class="section-divider"></div>
+        </div>
+
+        <div class="conclusion-box">
+            <h3>📝 Project Conclusion</h3>
+            <p>
+                This Text-to-Speech project has been a wonderful learning experience.
+                Through this project, I have gained practical knowledge of
+                <strong style="color:#ffb300;">Python programming</strong>,
+                including concepts like functions, dictionaries, loops, conditional
+                statements, file handling, and working with external libraries.
+                <br><br>
+                I also learned about <strong style="color:#ffb300;">cloud-based AI services</strong>
+                and how modern applications use APIs to access powerful features like
+                neural text-to-speech. The project demonstrates that even a simple
+                Python program can leverage cutting-edge AI technology.
+                <br><br>
+                The program is <strong style="color:#ffb300;">practical and useful</strong>
+                — it can help visually impaired individuals, assist in language learning,
+                and serve as a foundation for more advanced projects like voice assistants.
+                <br><br>
+                I am grateful to <strong style="color:#ffb300;">Er. Pankaj Sir</strong>
+                for guiding me throughout this project and helping me develop both
+                my programming skills and confidence.
+            </p>
+        </div>
+    </section>
+
+    <!-- ===== BIBLIOGRAPHY ===== -->
+    <section class="section" style="padding-top: 20px;">
+        <div class="section-header">
+            <div class="section-number">11</div>
+            <h2>Bibliography</h2>
+            <p>References and resources used</p>
+            <div class="section-divider"></div>
+        </div>
+
+        <div class="card">
+            <ul class="bib-list">
+                <li>
+                    <strong>NCERT Computer Science Textbook</strong> — Class XI,
+                    Chapter: Python Programming Fundamentals
+                </li>
+                <li>
+                    <strong>Python Official Documentation</strong> —
+                    docs.python.org — For understanding modules and functions
+                </li>
+                <li>
+                    <strong>Edge TTS Library (PyPI)</strong> —
+                    pypi.org/project/edge-tts — For library usage and voice list
+                </li>
+                <li>
+                    <strong>Pygame Documentation</strong> —
+                    pygame.org/docs — For audio playback methods
+                </li>
+                <li>
+                    <strong>Microsoft Azure AI Speech</strong> —
+                    azure.microsoft.com — For understanding neural TTS technology
+                </li>
+                <li>
+                    <strong>GeeksforGeeks & W3Schools</strong> —
+                    For Python programming tutorials and examples
+                </li>
+            </ul>
+        </div>
+    </section>
+
+    <!-- ===== FOOTER ===== -->
+    <footer class="footer">
+        <p>
+            Made with <span class="heart">❤️</span> by
+            <span class="name-highlight">Harsh</span> |
+            Class XI-A | Roll No. 17 |
+            Maples Academy Khatauli
+        </p>
+        <p style="margin-top: 8px; font-size: 0.75rem; color: #555;">
+            Computer Science Project 2024–25 | Submitted to Er. Pankaj Sir
+        </p>
+    </footer>
+
+    <!-- ===== BACK TO TOP BUTTON ===== -->
+    <a href="#top" class="back-to-top" title="Back to Top">↑</a>
+
+</body>
+</html>
