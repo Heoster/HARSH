@@ -3,29 +3,49 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Python Project - Text to Speech | Harsh - Class 11A</title>
-    <style>
-        /* ===== GOOGLE FONTS ===== */
-        @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=Poppins:wght@300;400;500;600;700&family=Source+Code+Pro:wght@400;500&display=swap');
+    <title>Text to Speech Project | Harsh - Class XI-A | Maples Academy Khatauli</title>
 
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700;800;900&family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+    <style>
         /* ===== ROOT VARIABLES ===== */
         :root {
-            --primary: #1a237e;
-            --primary-light: #3949ab;
-            --accent: #ff6f00;
-            --accent-light: #ffb300;
-            --dark: #0d1117;
-            --light: #f8f9fa;
-            --card-bg: #ffffff;
-            --gradient-1: linear-gradient(135deg, #1a237e 0%, #283593 50%, #3949ab 100%);
-            --gradient-2: linear-gradient(135deg, #ff6f00 0%, #ff8f00 50%, #ffb300 100%);
-            --gradient-3: linear-gradient(135deg, #0d1117 0%, #1a237e 100%);
-            --shadow: 0 10px 40px rgba(0,0,0,0.1);
-            --shadow-hover: 0 20px 60px rgba(0,0,0,0.15);
+            --primary: #0f172a;
+            --primary-mid: #1e293b;
+            --accent-1: #6366f1;
+            --accent-2: #8b5cf6;
+            --accent-3: #a78bfa;
+            --orange: #f59e0b;
+            --orange-light: #fbbf24;
+            --green: #10b981;
+            --red: #ef4444;
+            --cyan: #06b6d4;
+            --pink: #ec4899;
+            --text: #334155;
+            --text-light: #94a3b8;
+            --bg: #f8fafc;
+            --card: #ffffff;
+            --glass: rgba(255,255,255,0.08);
+            --border: rgba(255,255,255,0.1);
+            --shadow-sm: 0 1px 3px rgba(0,0,0,0.06);
+            --shadow-md: 0 4px 20px rgba(0,0,0,0.08);
+            --shadow-lg: 0 10px 40px rgba(0,0,0,0.12);
+            --shadow-xl: 0 25px 60px rgba(0,0,0,0.15);
+            --gradient-main: linear-gradient(135deg, #6366f1, #8b5cf6, #a78bfa);
+            --gradient-warm: linear-gradient(135deg, #f59e0b, #f97316);
+            --gradient-dark: linear-gradient(135deg, #0f172a 0%, #1e1b4b 50%, #0f172a 100%);
+            --gradient-hero: linear-gradient(160deg, #0f172a 0%, #1e1b4b 30%, #312e81 60%, #1e1b4b 80%, #0f172a 100%);
+            --radius: 16px;
+            --radius-sm: 10px;
+            --radius-full: 9999px;
         }
 
-        /* ===== RESET & BASE ===== */
-        * {
+        /* ===== RESET ===== */
+        *, *::before, *::after {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
@@ -33,29 +53,128 @@
 
         html {
             scroll-behavior: smooth;
+            scroll-padding-top: 80px;
         }
 
         body {
-            font-family: 'Poppins', sans-serif;
-            background: #f0f2f5;
-            color: #333;
-            line-height: 1.8;
+            font-family: 'Inter', -apple-system, sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            line-height: 1.7;
             overflow-x: hidden;
         }
 
-        /* ===== NAVIGATION ===== */
+        ::selection {
+            background: var(--accent-1);
+            color: #fff;
+        }
+
+        /* ===== SCROLLBAR ===== */
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: var(--primary); }
+        ::-webkit-scrollbar-thumb {
+            background: var(--accent-1);
+            border-radius: 10px;
+        }
+
+        /* ===== ANIMATIONS ===== */
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(50px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes fadeInDown {
+            from { opacity: 0; transform: translateY(-30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes fadeInLeft {
+            from { opacity: 0; transform: translateX(-40px); }
+            to { opacity: 1; transform: translateX(0); }
+        }
+
+        @keyframes fadeInRight {
+            from { opacity: 0; transform: translateX(40px); }
+            to { opacity: 1; transform: translateX(0); }
+        }
+
+        @keyframes scaleIn {
+            from { opacity: 0; transform: scale(0.8); }
+            to { opacity: 1; transform: scale(1); }
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
+        }
+
+        @keyframes pulse-glow {
+            0%, 100% { box-shadow: 0 0 20px rgba(99,102,241,0.3); }
+            50% { box-shadow: 0 0 40px rgba(99,102,241,0.6); }
+        }
+
+        @keyframes gradient-shift {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        @keyframes typing {
+            from { width: 0; }
+            to { width: 100%; }
+        }
+
+        @keyframes blink {
+            50% { border-color: transparent; }
+        }
+
+        @keyframes orbit {
+            from { transform: rotate(0deg) translateX(200px) rotate(0deg); }
+            to { transform: rotate(360deg) translateX(200px) rotate(-360deg); }
+        }
+
+        @keyframes spin-slow {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        @keyframes bounce-scroll {
+            0%, 20%, 50%, 80%, 100% { transform: translateY(0) translateX(-50%); }
+            40% { transform: translateY(-15px) translateX(-50%); }
+            60% { transform: translateY(-7px) translateX(-50%); }
+        }
+
+        .animate-on-scroll {
+            opacity: 0;
+            transform: translateY(40px);
+            transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .animate-on-scroll.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* ===== NAVBAR ===== */
         .navbar {
             position: fixed;
             top: 0;
             width: 100%;
-            background: rgba(13, 17, 23, 0.95);
-            backdrop-filter: blur(20px);
-            padding: 15px 0;
-            z-index: 1000;
-            box-shadow: 0 2px 30px rgba(0,0,0,0.3);
+            z-index: 9999;
+            padding: 12px 0;
+            transition: all 0.4s ease;
+            background: transparent;
         }
 
-        .nav-container {
+        .navbar.scrolled {
+            background: rgba(15, 23, 42, 0.95);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            box-shadow: 0 4px 30px rgba(0,0,0,0.3);
+            padding: 8px 0;
+        }
+
+        .nav-inner {
             max-width: 1200px;
             margin: 0 auto;
             display: flex;
@@ -66,588 +185,710 @@
 
         .nav-logo {
             font-family: 'Playfair Display', serif;
-            font-size: 1.5rem;
-            font-weight: 700;
+            font-size: 1.6rem;
+            font-weight: 800;
             color: #fff;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 8px;
         }
 
-        .nav-logo span {
-            color: var(--accent);
+        .nav-logo i {
+            font-size: 1.3rem;
+            color: var(--orange);
         }
 
-        .nav-links {
+        .nav-logo .dot {
+            color: var(--accent-1);
+        }
+
+        .nav-menu {
             display: flex;
             list-style: none;
-            gap: 5px;
+            gap: 4px;
             flex-wrap: wrap;
             justify-content: center;
         }
 
-        .nav-links a {
-            color: #ccc;
+        .nav-menu a {
+            color: rgba(255,255,255,0.7);
             text-decoration: none;
             padding: 8px 16px;
-            border-radius: 25px;
-            font-size: 0.85rem;
+            border-radius: var(--radius-full);
+            font-size: 0.82rem;
             font-weight: 500;
+            transition: all 0.3s ease;
+            letter-spacing: 0.3px;
+        }
+
+        .nav-menu a:hover, .nav-menu a.active {
+            color: #fff;
+            background: rgba(99,102,241,0.3);
+        }
+
+        .hamburger {
+            display: none;
+            flex-direction: column;
+            gap: 5px;
+            cursor: pointer;
+            z-index: 10001;
+        }
+
+        .hamburger span {
+            width: 28px;
+            height: 2.5px;
+            background: #fff;
+            border-radius: 5px;
             transition: all 0.3s ease;
         }
 
-        .nav-links a:hover {
-            color: #fff;
-            background: var(--primary-light);
-        }
-
-        /* ===== COVER PAGE / HERO ===== */
+        /* ===== HERO SECTION ===== */
         .hero {
             min-height: 100vh;
-            background: var(--gradient-3);
+            background: var(--gradient-hero);
             display: flex;
             align-items: center;
             justify-content: center;
             text-align: center;
-            padding: 120px 30px 80px;
+            padding: 100px 30px 60px;
             position: relative;
             overflow: hidden;
         }
 
-        .hero::before {
-            content: '';
+        /* Animated background particles */
+        .hero-particles {
             position: absolute;
-            width: 600px;
-            height: 600px;
-            background: radial-gradient(circle, rgba(255,111,0,0.15) 0%, transparent 70%);
-            top: -100px;
-            right: -100px;
+            inset: 0;
+            overflow: hidden;
+        }
+
+        .particle {
+            position: absolute;
             border-radius: 50%;
+            opacity: 0.15;
             animation: float 8s ease-in-out infinite;
         }
 
-        .hero::after {
-            content: '';
+        .particle:nth-child(1) {
+            width: 500px; height: 500px;
+            background: radial-gradient(circle, var(--accent-1), transparent 70%);
+            top: -150px; right: -100px;
+            animation-delay: 0s;
+        }
+
+        .particle:nth-child(2) {
+            width: 400px; height: 400px;
+            background: radial-gradient(circle, var(--accent-2), transparent 70%);
+            bottom: -100px; left: -100px;
+            animation-delay: -3s;
+        }
+
+        .particle:nth-child(3) {
+            width: 300px; height: 300px;
+            background: radial-gradient(circle, var(--orange), transparent 70%);
+            top: 40%; left: 60%;
+            animation-delay: -5s;
+            opacity: 0.1;
+        }
+
+        .particle:nth-child(4) {
+            width: 200px; height: 200px;
+            background: radial-gradient(circle, var(--cyan), transparent 70%);
+            top: 20%; left: 10%;
+            animation-delay: -2s;
+            opacity: 0.08;
+        }
+
+        /* Grid background */
+        .hero-grid {
             position: absolute;
-            width: 400px;
-            height: 400px;
-            background: radial-gradient(circle, rgba(57,73,171,0.2) 0%, transparent 70%);
-            bottom: -50px;
-            left: -50px;
-            border-radius: 50%;
-            animation: float 6s ease-in-out infinite reverse;
-        }
-
-        @keyframes float {
-            0%, 100% { transform: translateY(0px) scale(1); }
-            50% { transform: translateY(-30px) scale(1.05); }
-        }
-
-        @keyframes fadeInUp {
-            from { opacity: 0; transform: translateY(40px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        @keyframes slideInLeft {
-            from { opacity: 0; transform: translateX(-50px); }
-            to { opacity: 1; transform: translateX(0); }
-        }
-
-        @keyframes pulse {
-            0%, 100% { transform: scale(1); }
-            50% { transform: scale(1.05); }
+            inset: 0;
+            background-image:
+                linear-gradient(rgba(99,102,241,0.05) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(99,102,241,0.05) 1px, transparent 1px);
+            background-size: 60px 60px;
         }
 
         .hero-content {
             position: relative;
-            z-index: 2;
-            animation: fadeInUp 1s ease-out;
+            z-index: 10;
+            max-width: 800px;
         }
 
-        .school-badge {
-            display: inline-block;
-            background: rgba(255,255,255,0.1);
-            border: 2px solid rgba(255,255,255,0.2);
-            padding: 12px 35px;
-            border-radius: 50px;
+        .hero-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            background: var(--glass);
+            border: 1px solid var(--border);
+            padding: 10px 28px;
+            border-radius: var(--radius-full);
             margin-bottom: 30px;
             backdrop-filter: blur(10px);
+            animation: fadeInDown 0.8s ease-out;
         }
 
-        .school-badge img {
-            width: 30px;
-            vertical-align: middle;
-            margin-right: 8px;
+        .hero-badge i {
+            color: var(--orange);
+            font-size: 1.1rem;
         }
 
-        .school-badge span {
-            color: #fff;
-            font-size: 1rem;
+        .hero-badge span {
+            color: rgba(255,255,255,0.9);
+            font-size: 0.88rem;
             font-weight: 600;
-            letter-spacing: 2px;
+            letter-spacing: 1.5px;
             text-transform: uppercase;
         }
 
         .hero h1 {
             font-family: 'Playfair Display', serif;
-            font-size: 3.5rem;
+            font-size: clamp(2.5rem, 6vw, 4rem);
             font-weight: 900;
             color: #fff;
-            margin-bottom: 10px;
-            line-height: 1.2;
+            line-height: 1.15;
+            margin-bottom: 15px;
+            animation: fadeInUp 1s ease-out 0.2s both;
         }
 
-        .hero h1 span {
-            display: block;
-            background: var(--gradient-2);
+        .hero h1 .gradient-text {
+            background: linear-gradient(135deg, var(--orange), #f97316, var(--orange-light));
+            background-size: 200% 200%;
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
+            animation: gradient-shift 4s ease infinite;
         }
 
         .hero-subtitle {
-            font-size: 1.3rem;
-            color: #b0bec5;
-            margin-bottom: 15px;
-            font-weight: 300;
+            font-size: 1.2rem;
+            color: var(--accent-3);
+            font-weight: 500;
+            margin-bottom: 8px;
+            animation: fadeInUp 1s ease-out 0.4s both;
         }
 
-        .hero-subject {
-            font-size: 1.1rem;
-            color: var(--accent-light);
-            font-weight: 600;
-            margin-bottom: 40px;
-            letter-spacing: 3px;
+        .hero-session {
+            font-size: 0.95rem;
+            color: var(--orange);
+            font-weight: 700;
+            letter-spacing: 4px;
             text-transform: uppercase;
+            margin-bottom: 45px;
+            animation: fadeInUp 1s ease-out 0.5s both;
         }
 
-        .student-info-card {
-            background: rgba(255,255,255,0.05);
-            border: 1px solid rgba(255,255,255,0.1);
-            border-radius: 20px;
+        /* Student Info Card */
+        .student-card {
+            background: rgba(255,255,255,0.04);
+            border: 1px solid rgba(255,255,255,0.08);
+            border-radius: 24px;
             padding: 40px;
-            max-width: 600px;
-            margin: 0 auto 40px;
-            backdrop-filter: blur(20px);
+            backdrop-filter: blur(30px);
+            -webkit-backdrop-filter: blur(30px);
+            animation: fadeInUp 1s ease-out 0.6s both;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .student-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: var(--gradient-main);
         }
 
         .info-grid {
             display: grid;
             grid-template-columns: 1fr 1fr;
-            gap: 20px;
+            gap: 16px;
+        }
+
+        .info-chip {
+            padding: 14px 18px;
+            background: rgba(255,255,255,0.04);
+            border: 1px solid rgba(255,255,255,0.06);
+            border-radius: 14px;
             text-align: left;
+            transition: all 0.3s ease;
         }
 
-        .info-item {
-            padding: 15px 20px;
-            background: rgba(255,255,255,0.05);
-            border-radius: 12px;
-            border-left: 3px solid var(--accent);
+        .info-chip:hover {
+            background: rgba(99,102,241,0.1);
+            border-color: rgba(99,102,241,0.3);
+            transform: translateY(-2px);
         }
 
-        .info-item.full-width {
+        .info-chip.full {
             grid-column: 1 / -1;
         }
 
-        .info-label {
-            font-size: 0.7rem;
-            color: #90a4ae;
+        .info-chip .label {
+            font-size: 0.65rem;
+            color: var(--text-light);
             text-transform: uppercase;
             letter-spacing: 2px;
-            font-weight: 600;
+            font-weight: 700;
+            margin-bottom: 4px;
         }
 
-        .info-value {
-            font-size: 1.05rem;
+        .info-chip .value {
+            font-size: 1rem;
             color: #fff;
             font-weight: 600;
         }
 
-        .scroll-indicator {
+        .info-chip .value i {
+            margin-right: 6px;
+            color: var(--accent-3);
+            font-size: 0.85rem;
+        }
+
+        /* Scroll indicator */
+        .scroll-down {
             position: absolute;
             bottom: 30px;
             left: 50%;
-            transform: translateX(-50%);
-            z-index: 2;
+            animation: bounce-scroll 2s infinite;
+            z-index: 10;
         }
 
-        .scroll-indicator a {
+        .scroll-down a {
             display: flex;
             flex-direction: column;
             align-items: center;
-            color: rgba(255,255,255,0.5);
+            gap: 8px;
+            color: rgba(255,255,255,0.4);
             text-decoration: none;
-            font-size: 0.75rem;
-            letter-spacing: 2px;
+            font-size: 0.7rem;
+            letter-spacing: 3px;
             text-transform: uppercase;
         }
 
-        .scroll-arrow {
-            width: 30px;
-            height: 50px;
-            border: 2px solid rgba(255,255,255,0.3);
-            border-radius: 15px;
+        .scroll-mouse {
+            width: 26px;
+            height: 42px;
+            border: 2px solid rgba(255,255,255,0.25);
+            border-radius: 14px;
             position: relative;
-            margin-bottom: 10px;
         }
 
-        .scroll-arrow::before {
+        .scroll-mouse::before {
             content: '';
-            width: 6px;
-            height: 6px;
-            background: var(--accent);
-            border-radius: 50%;
+            width: 4px;
+            height: 10px;
+            background: var(--accent-1);
+            border-radius: 4px;
             position: absolute;
-            top: 8px;
+            top: 7px;
             left: 50%;
             transform: translateX(-50%);
-            animation: scrollDown 2s ease-in-out infinite;
+            animation: scrollDot 2s ease-in-out infinite;
         }
 
-        @keyframes scrollDown {
-            0% { top: 8px; opacity: 1; }
-            100% { top: 32px; opacity: 0; }
+        @keyframes scrollDot {
+            0%, 100% { top: 7px; opacity: 1; }
+            100% { top: 24px; opacity: 0; }
         }
 
         /* ===== SECTIONS ===== */
         .section {
             max-width: 1000px;
             margin: 0 auto;
-            padding: 80px 30px;
+            padding: 90px 30px;
         }
 
-        .section-header {
-            text-align: center;
-            margin-bottom: 50px;
-        }
-
-        .section-number {
-            display: inline-block;
-            background: var(--gradient-2);
-            color: #fff;
-            width: 45px;
-            height: 45px;
-            line-height: 45px;
-            border-radius: 50%;
+        .section-tag {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: linear-gradient(135deg, rgba(99,102,241,0.1), rgba(139,92,246,0.1));
+            border: 1px solid rgba(99,102,241,0.2);
+            padding: 6px 18px;
+            border-radius: var(--radius-full);
+            font-size: 0.75rem;
             font-weight: 700;
-            font-size: 1.1rem;
-            margin-bottom: 15px;
+            color: var(--accent-1);
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            margin-bottom: 16px;
         }
 
-        .section-header h2 {
+        .section-tag i {
+            font-size: 0.7rem;
+        }
+
+        .section-title {
             font-family: 'Playfair Display', serif;
-            font-size: 2.2rem;
-            font-weight: 700;
+            font-size: clamp(1.8rem, 4vw, 2.5rem);
+            font-weight: 800;
             color: var(--primary);
-            margin-bottom: 10px;
+            margin-bottom: 12px;
+            line-height: 1.2;
         }
 
-        .section-header p {
-            color: #777;
-            font-size: 1rem;
+        .section-desc {
+            color: var(--text-light);
+            font-size: 1.05rem;
             max-width: 600px;
-            margin: 0 auto;
+            margin-bottom: 40px;
         }
 
-        .section-divider {
-            width: 60px;
+        .section-center {
+            text-align: center;
+        }
+
+        .section-center .section-desc {
+            margin: 0 auto 40px;
+        }
+
+        .divider-line {
+            width: 50px;
             height: 4px;
-            background: var(--gradient-2);
-            margin: 15px auto 0;
+            background: var(--gradient-main);
             border-radius: 2px;
+            margin-top: 12px;
+            margin-bottom: 16px;
+        }
+
+        .section-center .divider-line {
+            margin: 12px auto 16px;
         }
 
         /* ===== CARDS ===== */
         .card {
-            background: var(--card-bg);
+            background: var(--card);
             border-radius: 20px;
-            padding: 40px;
-            box-shadow: var(--shadow);
-            margin-bottom: 30px;
-            border: 1px solid rgba(0,0,0,0.05);
-            transition: all 0.3s ease;
-        }
-
-        .card:hover {
-            box-shadow: var(--shadow-hover);
-            transform: translateY(-3px);
-        }
-
-        .card h3 {
-            font-family: 'Playfair Display', serif;
-            font-size: 1.5rem;
-            color: var(--primary);
-            margin-bottom: 15px;
-            display: flex;
-            align-items: center;
-            gap: 12px;
-        }
-
-        .card h3 .icon {
-            font-size: 1.8rem;
-        }
-
-        .card p, .card li {
-            color: #555;
-            font-size: 0.95rem;
-            line-height: 1.9;
-        }
-
-        .card ul {
-            padding-left: 20px;
-        }
-
-        .card ul li {
-            margin-bottom: 10px;
-            position: relative;
-        }
-
-        .card ul li::marker {
-            color: var(--accent);
-        }
-
-        .highlight {
-            background: var(--gradient-2);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            font-weight: 700;
-        }
-
-        .badge {
-            display: inline-block;
-            padding: 4px 14px;
-            border-radius: 20px;
-            font-size: 0.75rem;
-            font-weight: 600;
-            margin: 3px;
-        }
-
-        .badge-blue {
-            background: #e3f2fd;
-            color: #1565c0;
-        }
-
-        .badge-orange {
-            background: #fff3e0;
-            color: #e65100;
-        }
-
-        .badge-green {
-            background: #e8f5e9;
-            color: #2e7d32;
-        }
-
-        .badge-purple {
-            background: #f3e5f5;
-            color: #7b1fa2;
-        }
-
-        /* ===== TOOLS GRID ===== */
-        .tools-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 25px;
-            margin-top: 20px;
-        }
-
-        .tool-card {
-            background: var(--card-bg);
-            border-radius: 20px;
-            padding: 35px;
-            box-shadow: var(--shadow);
-            border: 1px solid rgba(0,0,0,0.05);
-            text-align: center;
-            transition: all 0.3s ease;
+            padding: 36px;
+            box-shadow: var(--shadow-md);
+            border: 1px solid rgba(0,0,0,0.04);
+            margin-bottom: 24px;
+            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
             position: relative;
             overflow: hidden;
         }
 
-        .tool-card::before {
+        .card::before {
             content: '';
             position: absolute;
             top: 0;
             left: 0;
             right: 0;
-            height: 4px;
-            background: var(--gradient-2);
+            height: 3px;
+            background: var(--gradient-main);
+            opacity: 0;
+            transition: opacity 0.3s ease;
         }
 
-        .tool-card:hover {
-            transform: translateY(-8px);
-            box-shadow: var(--shadow-hover);
+        .card:hover {
+            box-shadow: var(--shadow-lg);
+            transform: translateY(-4px);
         }
 
-        .tool-icon {
+        .card:hover::before {
+            opacity: 1;
+        }
+
+        .card-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.4rem;
+            font-weight: 700;
+            color: var(--primary);
+            margin-bottom: 16px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .card-title .card-icon {
+            width: 42px;
+            height: 42px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.1rem;
+            flex-shrink: 0;
+        }
+
+        .icon-indigo {
+            background: linear-gradient(135deg, rgba(99,102,241,0.15), rgba(139,92,246,0.15));
+            color: var(--accent-1);
+        }
+
+        .icon-orange {
+            background: linear-gradient(135deg, rgba(245,158,11,0.15), rgba(249,115,22,0.15));
+            color: var(--orange);
+        }
+
+        .icon-green {
+            background: linear-gradient(135deg, rgba(16,185,129,0.15), rgba(5,150,105,0.15));
+            color: var(--green);
+        }
+
+        .icon-pink {
+            background: linear-gradient(135deg, rgba(236,72,153,0.15), rgba(219,39,119,0.15));
+            color: var(--pink);
+        }
+
+        .icon-cyan {
+            background: linear-gradient(135deg, rgba(6,182,212,0.15), rgba(8,145,178,0.15));
+            color: var(--cyan);
+        }
+
+        .icon-red {
+            background: linear-gradient(135deg, rgba(239,68,68,0.15), rgba(220,38,38,0.15));
+            color: var(--red);
+        }
+
+        .card p, .card li {
+            color: #64748b;
+            font-size: 0.93rem;
+            line-height: 1.85;
+        }
+
+        .card ul {
+            padding-left: 0;
+            list-style: none;
+        }
+
+        .card ul li {
+            padding: 8px 0 8px 30px;
+            position: relative;
+        }
+
+        .card ul li::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 17px;
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: var(--gradient-main);
+        }
+
+        /* ===== CERTIFICATE ===== */
+        .certificate-card {
+            background: #fff;
+            border: 3px double var(--accent-1);
+            border-radius: 24px;
+            padding: 60px 50px;
+            text-align: center;
+            position: relative;
+            box-shadow: var(--shadow-lg);
+        }
+
+        .certificate-card::before {
+            content: '';
+            position: absolute;
+            top: 12px; left: 12px; right: 12px; bottom: 12px;
+            border: 1px solid rgba(99,102,241,0.15);
+            border-radius: 16px;
+            pointer-events: none;
+        }
+
+        .cert-ornament {
             font-size: 3rem;
             margin-bottom: 15px;
             display: block;
         }
 
-        .tool-card h4 {
-            font-size: 1.2rem;
-            color: var(--primary);
-            margin-bottom: 10px;
-            font-weight: 700;
-        }
-
-        .tool-card p {
-            color: #666;
-            font-size: 0.88rem;
-            line-height: 1.7;
-        }
-
-        /* ===== HOW IT WORKS ===== */
-        .steps-container {
-            position: relative;
-        }
-
-        .step {
-            display: flex;
-            gap: 30px;
-            margin-bottom: 35px;
-            align-items: flex-start;
-        }
-
-        .step-number-circle {
-            min-width: 60px;
-            height: 60px;
-            background: var(--gradient-1);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: #fff;
-            font-weight: 700;
-            font-size: 1.3rem;
-            box-shadow: 0 5px 20px rgba(26,35,126,0.3);
-        }
-
-        .step-content {
-            background: var(--card-bg);
-            border-radius: 16px;
-            padding: 25px 30px;
-            box-shadow: var(--shadow);
-            flex: 1;
-            border: 1px solid rgba(0,0,0,0.05);
-        }
-
-        .step-content h4 {
-            font-size: 1.1rem;
+        .cert-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.2rem;
+            font-weight: 800;
             color: var(--primary);
             margin-bottom: 8px;
         }
 
-        .step-content p {
-            color: #666;
-            font-size: 0.9rem;
-        }
-
-        /* ===== CODE BLOCK ===== */
-        .code-container {
-            background: #0d1117;
-            border-radius: 16px;
-            overflow: hidden;
-            box-shadow: var(--shadow);
-            margin: 25px 0;
-        }
-
-        .code-header {
-            background: #161b22;
-            padding: 12px 20px;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
-
-        .code-dot {
-            width: 12px;
-            height: 12px;
-            border-radius: 50%;
-        }
-
-        .code-dot.red { background: #ff5f57; }
-        .code-dot.yellow { background: #ffbd2e; }
-        .code-dot.green { background: #28ca41; }
-
-        .code-filename {
-            color: #8b949e;
+        .cert-subtitle {
+            color: var(--accent-1);
             font-size: 0.8rem;
-            margin-left: 10px;
-            font-family: 'Source Code Pro', monospace;
+            font-weight: 700;
+            letter-spacing: 4px;
+            text-transform: uppercase;
+            margin-bottom: 30px;
         }
 
-        .code-block {
-            padding: 25px;
-            overflow-x: auto;
-            max-height: 500px;
-            overflow-y: auto;
+        .cert-body {
+            color: #64748b;
+            font-size: 1.02rem;
+            line-height: 2;
+            max-width: 600px;
+            margin: 0 auto 40px;
         }
 
-        .code-block pre {
-            margin: 0;
-            font-family: 'Source Code Pro', monospace;
-            font-size: 0.82rem;
-            line-height: 1.8;
-            color: #e6edf3;
+        .cert-body strong {
+            color: var(--primary);
         }
 
-        .code-block .comment { color: #8b949e; }
-        .code-block .keyword { color: #ff7b72; }
-        .code-block .string { color: #a5d6ff; }
-        .code-block .function { color: #d2a8ff; }
-        .code-block .builtin { color: #79c0ff; }
-        .code-block .decorator { color: #ffa657; }
-
-        /* ===== OUTPUT BOX ===== */
-        .output-box {
-            background: #1a1a2e;
-            border-radius: 16px;
-            padding: 30px;
-            margin: 25px 0;
-            box-shadow: var(--shadow);
+        .signatures {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px;
+            margin-top: 50px;
         }
 
-        .output-box h4 {
-            color: #28ca41;
-            font-family: 'Source Code Pro', monospace;
-            font-size: 0.85rem;
-            margin-bottom: 15px;
-            letter-spacing: 1px;
+        .sig-item {
+            text-align: center;
         }
 
-        .output-box pre {
-            color: #b0bec5;
-            font-family: 'Source Code Pro', monospace;
-            font-size: 0.82rem;
-            line-height: 1.9;
-            white-space: pre-wrap;
+        .sig-line {
+            width: 120px;
+            height: 2px;
+            background: var(--primary);
+            margin: 0 auto 12px;
         }
 
-        .output-box .user-input {
-            color: #ffb300;
+        .sig-name {
+            font-weight: 700;
+            color: var(--primary);
+            font-size: 0.95rem;
         }
 
-        .output-box .success {
-            color: #28ca41;
+        .sig-role {
+            color: var(--text-light);
+            font-size: 0.78rem;
+            margin-top: 2px;
         }
+
+        /* ===== ACKNOWLEDGEMENT ===== */
+        .ack-card {
+            background: linear-gradient(135deg, #fefce8, #fffbeb, #fef3c7);
+            border-left: 5px solid var(--orange);
+            border-radius: 20px;
+            padding: 40px;
+            font-size: 1.02rem;
+            color: #78350f;
+            line-height: 2.2;
+            font-style: italic;
+            box-shadow: var(--shadow-md);
+            position: relative;
+        }
+
+        .ack-card::before {
+            content: '\201C';
+            font-family: 'Playfair Display', serif;
+            font-size: 6rem;
+            color: rgba(245,158,11,0.2);
+            position: absolute;
+            top: -10px;
+            left: 20px;
+            line-height: 1;
+        }
+
+        .ack-card strong {
+            color: #92400e;
+            font-style: normal;
+        }
+
+        .ack-signature {
+            text-align: right;
+            margin-top: 20px;
+            font-style: normal;
+            font-weight: 700;
+            color: #92400e;
+        }
+
+        /* ===== TOOLS GRID ===== */
+        .tools-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(290px, 1fr));
+            gap: 22px;
+        }
+
+        .tool-card {
+            background: var(--card);
+            border-radius: 20px;
+            padding: 32px;
+            box-shadow: var(--shadow-md);
+            border: 1px solid rgba(0,0,0,0.04);
+            text-align: center;
+            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .tool-card::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: var(--gradient-main);
+            transform: scaleX(0);
+            transition: transform 0.4s ease;
+        }
+
+        .tool-card:hover {
+            transform: translateY(-8px);
+            box-shadow: var(--shadow-xl);
+        }
+
+        .tool-card:hover::after {
+            transform: scaleX(1);
+        }
+
+        .tool-emoji {
+            font-size: 2.8rem;
+            margin-bottom: 14px;
+            display: block;
+        }
+
+        .tool-card h4 {
+            font-size: 1.15rem;
+            color: var(--primary);
+            font-weight: 700;
+            margin-bottom: 10px;
+        }
+
+        .tool-card p {
+            color: var(--text-light);
+            font-size: 0.87rem;
+            line-height: 1.7;
+        }
+
+        .tool-badge {
+            display: inline-block;
+            padding: 4px 14px;
+            border-radius: var(--radius-full);
+            font-size: 0.7rem;
+            font-weight: 700;
+            margin-top: 14px;
+            letter-spacing: 0.5px;
+        }
+
+        .tb-lang { background: #eef2ff; color: #4338ca; }
+        .tb-lib { background: #fff7ed; color: #c2410c; }
+        .tb-mod { background: #f5f3ff; color: #7c3aed; }
+        .tb-ide { background: #ecfdf5; color: #059669; }
+        .tb-cloud { background: #fef2f2; color: #dc2626; }
 
         /* ===== TABLE ===== */
         .styled-table {
             width: 100%;
             border-collapse: collapse;
-            margin: 20px 0;
-            border-radius: 12px;
+            border-radius: var(--radius);
             overflow: hidden;
-            box-shadow: var(--shadow);
+            box-shadow: var(--shadow-md);
+            margin: 20px 0;
         }
 
         .styled-table thead {
-            background: var(--gradient-1);
+            background: var(--gradient-main);
         }
 
         .styled-table th {
             color: #fff;
-            padding: 15px 20px;
+            padding: 16px 20px;
             font-weight: 600;
-            font-size: 0.9rem;
+            font-size: 0.85rem;
             text-align: left;
             letter-spacing: 0.5px;
         }
@@ -655,98 +896,79 @@
         .styled-table td {
             padding: 14px 20px;
             font-size: 0.88rem;
-            color: #555;
-            border-bottom: 1px solid #f0f0f0;
-        }
-
-        .styled-table tbody tr {
+            color: #64748b;
+            border-bottom: 1px solid #f1f5f9;
             background: #fff;
-            transition: all 0.2s ease;
         }
 
-        .styled-table tbody tr:hover {
-            background: #f8f9ff;
+        .styled-table tbody tr:hover td {
+            background: #f8fafc;
         }
 
-        .styled-table tbody tr:nth-child(even) {
-            background: #fafafa;
+        .styled-table td:first-child {
+            font-weight: 600;
+            color: var(--primary);
         }
 
-        /* ===== CERTIFICATE SECTION ===== */
-        .certificate {
-            background: var(--card-bg);
-            border: 3px double var(--primary);
-            border-radius: 20px;
-            padding: 50px 40px;
-            text-align: center;
+        /* ===== STEPS / HOW IT WORKS ===== */
+        .steps-list {
             position: relative;
-            box-shadow: var(--shadow);
         }
 
-        .certificate::before {
+        .steps-list::before {
             content: '';
             position: absolute;
-            top: 10px;
-            left: 10px;
-            right: 10px;
-            bottom: 10px;
-            border: 1px solid rgba(26,35,126,0.2);
-            border-radius: 14px;
-            pointer-events: none;
+            left: 34px;
+            top: 0;
+            bottom: 0;
+            width: 3px;
+            background: linear-gradient(to bottom, var(--accent-1), var(--accent-2), var(--orange));
+            border-radius: 3px;
         }
 
-        .certificate h3 {
-            font-family: 'Playfair Display', serif;
-            font-size: 2rem;
+        .step-item {
+            display: flex;
+            gap: 28px;
+            margin-bottom: 28px;
+            position: relative;
+        }
+
+        .step-num {
+            width: 68px;
+            height: 68px;
+            background: var(--gradient-main);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #fff;
+            font-weight: 800;
+            font-size: 1.3rem;
+            flex-shrink: 0;
+            position: relative;
+            z-index: 2;
+            box-shadow: 0 5px 20px rgba(99,102,241,0.35);
+        }
+
+        .step-body {
+            background: var(--card);
+            border-radius: var(--radius);
+            padding: 24px 28px;
+            box-shadow: var(--shadow-md);
+            flex: 1;
+            border: 1px solid rgba(0,0,0,0.04);
+        }
+
+        .step-body h4 {
+            font-size: 1.08rem;
             color: var(--primary);
-            margin-bottom: 25px;
-        }
-
-        .certificate p {
-            color: #555;
-            font-size: 1rem;
-            line-height: 2;
-            max-width: 600px;
-            margin: 0 auto;
-        }
-
-        .signature-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr 1fr;
-            gap: 30px;
-            margin-top: 50px;
-            text-align: center;
-        }
-
-        .signature-item {
-            padding-top: 15px;
-            border-top: 2px solid #333;
-        }
-
-        .signature-name {
             font-weight: 700;
-            color: var(--primary);
-            font-size: 0.95rem;
+            margin-bottom: 6px;
         }
 
-        .signature-role {
-            font-size: 0.8rem;
-            color: #888;
-        }
-
-        /* ===== ACKNOWLEDGEMENT ===== */
-        .acknowledgement-text {
-            font-size: 1.05rem;
-            color: #555;
-            line-height: 2.2;
-            text-align: justify;
-            max-width: 700px;
-            margin: 0 auto;
-            font-style: italic;
-            padding: 30px;
-            background: #fafafa;
-            border-radius: 16px;
-            border-left: 5px solid var(--accent);
+        .step-body p {
+            color: var(--text-light);
+            font-size: 0.9rem;
         }
 
         /* ===== FLOWCHART ===== */
@@ -755,434 +977,800 @@
             flex-direction: column;
             align-items: center;
             gap: 0;
-            margin: 30px 0;
+            padding: 20px 0;
         }
 
-        .flow-box {
-            padding: 15px 35px;
-            border-radius: 12px;
+        .flow-node {
+            padding: 14px 34px;
             font-weight: 600;
-            font-size: 0.9rem;
+            font-size: 0.88rem;
             text-align: center;
-            min-width: 250px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            min-width: 280px;
+            box-shadow: var(--shadow-sm);
+            transition: all 0.3s ease;
+        }
+
+        .flow-node:hover {
+            transform: scale(1.04);
+            box-shadow: var(--shadow-md);
         }
 
         .flow-start {
-            background: var(--gradient-1);
+            background: var(--gradient-main);
             color: #fff;
-            border-radius: 50px;
+            border-radius: var(--radius-full);
         }
 
         .flow-process {
-            background: #e3f2fd;
-            color: #1565c0;
-            border: 2px solid #90caf9;
+            background: #eef2ff;
+            color: #3730a3;
+            border: 2px solid #c7d2fe;
+            border-radius: var(--radius-sm);
         }
 
         .flow-decision {
-            background: #fff3e0;
-            color: #e65100;
-            border: 2px solid #ffcc80;
-            transform: rotate(0deg);
+            background: #fff7ed;
+            color: #c2410c;
+            border: 2px solid #fed7aa;
+            border-radius: var(--radius-sm);
+        }
+
+        .flow-io {
+            background: #ecfdf5;
+            color: #065f46;
+            border: 2px solid #a7f3d0;
+            border-radius: var(--radius-sm);
         }
 
         .flow-end {
-            background: #e8f5e9;
-            color: #2e7d32;
-            border-radius: 50px;
-            border: 2px solid #a5d6a7;
+            background: linear-gradient(135deg, var(--green), #059669);
+            color: #fff;
+            border-radius: var(--radius-full);
         }
 
         .flow-arrow {
-            font-size: 1.8rem;
-            color: #aaa;
+            color: var(--accent-1);
+            font-size: 1.6rem;
+            padding: 4px 0;
             line-height: 1;
-            padding: 5px 0;
         }
 
-        /* ===== CONCLUSION ===== */
-        .conclusion-box {
-            background: var(--gradient-3);
-            border-radius: 20px;
-            padding: 50px 40px;
-            color: #fff;
-            text-align: center;
+        /* ===== CODE BLOCK ===== */
+        .code-window {
+            background: #0d1117;
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: var(--shadow-xl);
+            margin: 24px 0;
+            border: 1px solid #30363d;
         }
 
-        .conclusion-box h3 {
-            font-family: 'Playfair Display', serif;
-            font-size: 1.8rem;
-            margin-bottom: 20px;
+        .code-titlebar {
+            background: #161b22;
+            padding: 13px 18px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            border-bottom: 1px solid #21262d;
         }
 
-        .conclusion-box p {
-            color: #b0bec5;
-            font-size: 1rem;
-            line-height: 2;
-            max-width: 700px;
-            margin: 0 auto;
+        .code-btn {
+            width: 13px;
+            height: 13px;
+            border-radius: 50%;
         }
 
-        /* ===== FOOTER ===== */
-        .footer {
-            background: var(--dark);
-            padding: 40px 30px;
-            text-align: center;
-            color: #666;
+        .code-btn.r { background: #ff5f57; }
+        .code-btn.y { background: #febc2e; }
+        .code-btn.g { background: #28c840; }
+
+        .code-fname {
+            color: #8b949e;
+            font-size: 0.8rem;
+            font-family: 'JetBrains Mono', monospace;
+            margin-left: 12px;
         }
 
-        .footer p {
-            font-size: 0.85rem;
+        .code-body {
+            padding: 24px;
+            overflow-x: auto;
+            max-height: 520px;
+            overflow-y: auto;
         }
 
-        .footer .name-highlight {
-            color: var(--accent);
+        .code-body pre {
+            margin: 0;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.82rem;
+            line-height: 1.9;
+            color: #e6edf3;
+        }
+
+        .c-comment { color: #8b949e; }
+        .c-keyword { color: #ff7b72; }
+        .c-string { color: #a5d6ff; }
+        .c-func { color: #d2a8ff; }
+        .c-built { color: #79c0ff; }
+        .c-const { color: #ffa657; }
+
+        /* ===== OUTPUT ===== */
+        .output-window {
+            background: #0f0f1a;
+            border-radius: 16px;
+            padding: 28px;
+            margin: 24px 0;
+            box-shadow: var(--shadow-lg);
+            border: 1px solid #1e1e30;
+        }
+
+        .output-label {
+            color: var(--green);
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.78rem;
             font-weight: 600;
+            margin-bottom: 16px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
         }
 
-        .footer .heart {
-            color: #ff5252;
-            animation: pulse 1.5s infinite;
-            display: inline-block;
+        .output-label i {
+            font-size: 0.7rem;
         }
 
-        /* ===== BIBLIOGRAPHY ===== */
-        .bib-list {
+        .output-window pre {
+            color: #b8c0d0;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.8rem;
+            line-height: 2;
+            white-space: pre-wrap;
+        }
+
+        .o-input { color: var(--orange-light); font-weight: 600; }
+        .o-success { color: var(--green); font-weight: 600; }
+        .o-info { color: var(--accent-3); }
+
+        /* ===== ADVANTAGES / LIMITATIONS GRID ===== */
+        .adv-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 24px;
+        }
+
+        .adv-card {
+            border-radius: 20px;
+            padding: 32px;
+            box-shadow: var(--shadow-md);
+            border: 1px solid rgba(0,0,0,0.04);
+        }
+
+        .adv-card.pros {
+            background: linear-gradient(135deg, #f0fdf4, #ecfdf5);
+            border-top: 4px solid var(--green);
+        }
+
+        .adv-card.cons {
+            background: linear-gradient(135deg, #fef2f2, #fff1f2);
+            border-top: 4px solid var(--red);
+        }
+
+        .adv-card h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.3rem;
+            margin-bottom: 16px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .adv-card.pros h3 { color: #065f46; }
+        .adv-card.cons h3 { color: #991b1b; }
+
+        .adv-card ul {
             list-style: none;
             padding: 0;
         }
 
-        .bib-list li {
-            padding: 15px 20px;
-            background: #fafafa;
-            margin-bottom: 10px;
-            border-radius: 10px;
-            border-left: 4px solid var(--accent);
+        .adv-card ul li {
+            padding: 8px 0;
             font-size: 0.9rem;
-            color: #555;
+            display: flex;
+            align-items: flex-start;
+            gap: 10px;
         }
 
-        .bib-list li strong {
+        .adv-card.pros li { color: #166534; }
+        .adv-card.cons li { color: #991b1b; }
+
+        .adv-card li i {
+            margin-top: 4px;
+            flex-shrink: 0;
+        }
+
+        /* ===== CONCLUSION ===== */
+        .conclusion-card {
+            background: var(--gradient-dark);
+            border-radius: 24px;
+            padding: 60px 50px;
+            text-align: center;
+            color: #fff;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .conclusion-card::before {
+            content: '';
+            position: absolute;
+            width: 400px;
+            height: 400px;
+            background: radial-gradient(circle, rgba(99,102,241,0.15), transparent 70%);
+            top: -100px;
+            right: -100px;
+            border-radius: 50%;
+        }
+
+        .conclusion-card h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 2rem;
+            font-weight: 800;
+            margin-bottom: 25px;
+            position: relative;
+            z-index: 2;
+        }
+
+        .conclusion-card p {
+            color: rgba(255,255,255,0.7);
+            font-size: 1rem;
+            line-height: 2.2;
+            max-width: 680px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 2;
+        }
+
+        .conclusion-card .highlight-text {
+            color: var(--orange);
+            font-weight: 700;
+        }
+
+        /* ===== BIBLIOGRAPHY ===== */
+        .bib-item {
+            display: flex;
+            gap: 16px;
+            align-items: flex-start;
+            padding: 18px 22px;
+            background: #f8fafc;
+            margin-bottom: 12px;
+            border-radius: var(--radius-sm);
+            border-left: 4px solid var(--accent-1);
+            transition: all 0.3s ease;
+        }
+
+        .bib-item:hover {
+            background: #eef2ff;
+            transform: translateX(5px);
+        }
+
+        .bib-num {
+            width: 30px;
+            height: 30px;
+            background: var(--gradient-main);
+            color: #fff;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.75rem;
+            font-weight: 700;
+            flex-shrink: 0;
+        }
+
+        .bib-text {
+            font-size: 0.9rem;
+            color: #64748b;
+            line-height: 1.6;
+        }
+
+        .bib-text strong {
             color: var(--primary);
         }
 
+        /* ===== FOOTER ===== */
+        .footer {
+            background: var(--primary);
+            padding: 50px 30px;
+            text-align: center;
+            position: relative;
+        }
+
+        .footer::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: var(--gradient-main);
+        }
+
+        .footer-logo {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.5rem;
+            font-weight: 800;
+            color: #fff;
+            margin-bottom: 15px;
+        }
+
+        .footer-logo .dot { color: var(--accent-1); }
+
+        .footer p {
+            color: rgba(255,255,255,0.4);
+            font-size: 0.85rem;
+            margin-bottom: 8px;
+        }
+
+        .footer .heart {
+            color: var(--red);
+            animation: pulse-glow 2s infinite;
+            display: inline-block;
+        }
+
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-top: 20px;
+        }
+
+        .footer-links a {
+            color: rgba(255,255,255,0.3);
+            font-size: 1.2rem;
+            transition: all 0.3s ease;
+        }
+
+        .footer-links a:hover {
+            color: var(--accent-1);
+            transform: translateY(-3px);
+        }
+
         /* ===== BACK TO TOP ===== */
-        .back-to-top {
+        .back-top {
             position: fixed;
             bottom: 30px;
             right: 30px;
-            width: 50px;
-            height: 50px;
-            background: var(--gradient-2);
+            width: 52px;
+            height: 52px;
+            background: var(--gradient-main);
             color: #fff;
             border: none;
             border-radius: 50%;
-            font-size: 1.5rem;
+            font-size: 1.2rem;
             cursor: pointer;
-            box-shadow: 0 5px 20px rgba(255,111,0,0.4);
-            z-index: 999;
-            display: flex;
+            box-shadow: 0 8px 25px rgba(99,102,241,0.4);
+            z-index: 9998;
+            display: none;
             align-items: center;
             justify-content: center;
             text-decoration: none;
             transition: all 0.3s ease;
         }
 
-        .back-to-top:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 30px rgba(255,111,0,0.5);
+        .back-top.show {
+            display: flex;
+        }
+
+        .back-top:hover {
+            transform: translateY(-5px) scale(1.05);
+            box-shadow: 0 12px 35px rgba(99,102,241,0.5);
+        }
+
+        /* ===== SEPARATOR ===== */
+        .section-sep {
+            border: none;
+            height: 1px;
+            background: linear-gradient(to right, transparent, #e2e8f0, transparent);
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        /* ===== PRINT BUTTON ===== */
+        .print-btn {
+            position: fixed;
+            bottom: 30px;
+            right: 95px;
+            padding: 12px 24px;
+            background: var(--gradient-warm);
+            color: #fff;
+            border: none;
+            border-radius: var(--radius-full);
+            font-size: 0.85rem;
+            font-weight: 600;
+            cursor: pointer;
+            box-shadow: 0 8px 25px rgba(245,158,11,0.35);
+            z-index: 9998;
+            display: none;
+            align-items: center;
+            gap: 8px;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            font-family: 'Inter', sans-serif;
+        }
+
+        .print-btn.show {
+            display: flex;
+        }
+
+        .print-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 12px 35px rgba(245,158,11,0.5);
         }
 
         /* ===== RESPONSIVE ===== */
         @media (max-width: 768px) {
-            .hero h1 { font-size: 2.2rem; }
+            .nav-menu { display: none; }
+            .hamburger { display: flex; }
+
+            .nav-menu.open {
+                display: flex;
+                flex-direction: column;
+                position: fixed;
+                top: 0;
+                left: 0;
+                right: 0;
+                bottom: 0;
+                background: rgba(15,23,42,0.98);
+                backdrop-filter: blur(20px);
+                justify-content: center;
+                align-items: center;
+                z-index: 10000;
+                gap: 10px;
+            }
+
+            .nav-menu.open a {
+                font-size: 1.2rem;
+                padding: 14px 30px;
+            }
+
             .info-grid { grid-template-columns: 1fr; }
-            .nav-links { display: none; }
-            .signature-grid { grid-template-columns: 1fr; gap: 30px; }
-            .step { flex-direction: column; align-items: center; text-align: center; }
-            .section { padding: 50px 20px; }
-            .student-info-card { padding: 25px; }
-            .card { padding: 25px; }
-            .certificate { padding: 30px 20px; }
+            .signatures { grid-template-columns: 1fr; gap: 25px; }
+            .adv-grid { grid-template-columns: 1fr; }
+            .step-item { flex-direction: column; align-items: center; text-align: center; }
+            .steps-list::before { display: none; }
+            .section { padding: 60px 20px; }
+            .student-card { padding: 24px; }
+            .certificate-card { padding: 35px 25px; }
+            .conclusion-card { padding: 40px 25px; }
+            .hero { padding: 100px 20px 60px; }
             .tools-grid { grid-template-columns: 1fr; }
+            .print-btn { display: none !important; }
+        }
+
+        /* ===== PRINT STYLES ===== */
+        @media print {
+            .navbar, .back-top, .print-btn, .scroll-down { display: none !important; }
+            .hero { min-height: auto; padding: 60px 30px; }
+            .section { padding: 40px 30px; page-break-inside: avoid; }
+            .card, .tool-card { box-shadow: none; border: 1px solid #ddd; }
+            body { background: #fff; }
         }
     </style>
 </head>
 <body>
 
-    <!-- ===== NAVIGATION ===== -->
-    <nav class="navbar" id="top">
-        <div class="nav-container">
-            <div class="nav-logo">Harsh<span>.</span>py</div>
-            <ul class="nav-links">
-                <li><a href="#home">Home</a></li>
+    <!-- ===== NAVBAR ===== -->
+    <nav class="navbar" id="top-nav">
+        <div class="nav-inner">
+            <a href="#top" class="nav-logo">
+                <i class="fas fa-code"></i> Harsh<span class="dot">.</span>py
+            </a>
+            <ul class="nav-menu" id="navMenu">
+                <li><a href="#top" class="active">Home</a></li>
                 <li><a href="#certificate">Certificate</a></li>
                 <li><a href="#acknowledgement">Acknowledgement</a></li>
                 <li><a href="#about">About</a></li>
                 <li><a href="#tools">Tools</a></li>
                 <li><a href="#working">Working</a></li>
-                <li><a href="#code">Code</a></li>
+                <li><a href="#source-code">Code</a></li>
                 <li><a href="#output">Output</a></li>
                 <li><a href="#conclusion">Conclusion</a></li>
             </ul>
+            <div class="hamburger" id="hamburger" onclick="toggleMenu()">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
         </div>
     </nav>
 
-    <!-- ===== COVER PAGE / HERO ===== -->
-    <section class="hero" id="home">
+    <!-- ===== HERO / COVER PAGE ===== -->
+    <section class="hero" id="top">
+        <div class="hero-particles">
+            <div class="particle"></div>
+            <div class="particle"></div>
+            <div class="particle"></div>
+            <div class="particle"></div>
+        </div>
+        <div class="hero-grid"></div>
+
         <div class="hero-content">
-            <div class="school-badge">
-                <span>🏫 Maples Academy Khatauli</span>
+            <div class="hero-badge">
+                <i class="fas fa-graduation-cap"></i>
+                <span>Maples Academy Khatauli</span>
             </div>
 
             <h1>
-                Computer Science
-                <span>Python Project</span>
+                Computer Science<br>
+                <span class="gradient-text">Python Project</span>
             </h1>
-            <p class="hero-subtitle">Text-to-Speech Program using Edge TTS</p>
-            <p class="hero-subject">📘 Session 2025-26</p>
 
-            <div class="student-info-card">
+            <p class="hero-subtitle">
+                <i class="fas fa-volume-up"></i>&nbsp;
+                Text-to-Speech Program using Edge TTS
+            </p>
+
+            <p class="hero-session">
+                <i class="fas fa-calendar-alt"></i>&nbsp; Session 2025–26
+            </p>
+
+            <div class="student-card">
                 <div class="info-grid">
-                    <div class="info-item">
-                        <div class="info-label">Student Name</div>
-                        <div class="info-value">Harsh</div>
+                    <div class="info-chip">
+                        <div class="label">Student Name</div>
+                        <div class="value"><i class="fas fa-user"></i> Harsh</div>
                     </div>
-                    <div class="info-item">
-                        <div class="info-label">Class & Section</div>
-                        <div class="info-value">XI – A</div>
+                    <div class="info-chip">
+                        <div class="label">Class & Section</div>
+                        <div class="value"><i class="fas fa-chalkboard"></i> XI – A</div>
                     </div>
-                    <div class="info-item">
-                        <div class="info-label">Roll Number</div>
-                        <div class="info-value">17</div>
+                    <div class="info-chip">
+                        <div class="label">Roll Number</div>
+                        <div class="value"><i class="fas fa-hashtag"></i> 17</div>
                     </div>
-                    <div class="info-item">
-                        <div class="info-label">Subject</div>
-                        <div class="info-value">Computer Science (083)</div>
+                    <div class="info-chip">
+                        <div class="label">Subject</div>
+                        <div class="value"><i class="fas fa-laptop-code"></i> Computer Science (083)</div>
                     </div>
-                    <div class="info-item full-width">
-                        <div class="info-label">Submitted To</div>
-                        <div class="info-value">Er. Pankaj Sir (PGT Computer Science)</div>
+                    <div class="info-chip full">
+                        <div class="label">Submitted To</div>
+                        <div class="value"><i class="fas fa-chalkboard-teacher"></i> Er. Pankaj Sir (PGT Computer Science)</div>
                     </div>
-                    <div class="info-item full-width">
-                        <div class="info-label">Principal</div>
-                        <div class="info-value">Mrs. Garima Singh</div>
+                    <div class="info-chip full">
+                        <div class="label">Principal</div>
+                        <div class="value"><i class="fas fa-user-tie"></i> Mrs. Garima Singh</div>
                     </div>
                 </div>
             </div>
         </div>
 
-        <div class="scroll-indicator">
+        <div class="scroll-down">
             <a href="#certificate">
-                <div class="scroll-arrow"></div>
-                Scroll Down
+                <div class="scroll-mouse"></div>
+                Scroll
             </a>
         </div>
     </section>
 
-    <!-- ===== CERTIFICATE ===== -->
-    <section class="section" id="certificate">
-        <div class="section-header">
-            <div class="section-number">1</div>
-            <h2>Certificate</h2>
-            <div class="section-divider"></div>
-        </div>
+    <hr class="section-sep">
 
-        <div class="certificate">
-            <h3>📜 Certificate</h3>
-            <p>
-                This is to certify that <strong>Harsh</strong>, a student of
-                <strong>Class XI-A</strong>, Roll No. <strong>17</strong> of
-                <strong>Maples Academy Khatauli</strong> has successfully completed
-                the Computer Science project titled
+    <!-- ===== CERTIFICATE ===== -->
+    <section class="section section-center" id="certificate">
+        <div class="section-tag"><i class="fas fa-circle"></i> Section 01</div>
+        <h2 class="section-title">Certificate</h2>
+        <div class="divider-line"></div>
+        <p class="section-desc">Official certification for the submitted project</p>
+
+        <div class="certificate-card animate-on-scroll">
+            <span class="cert-ornament">🏅</span>
+            <h3 class="cert-title">Certificate</h3>
+            <p class="cert-subtitle">Maples Academy Khatauli</p>
+
+            <p class="cert-body">
+                This is to certify that <strong>Harsh</strong>, a bonafide student of
+                <strong>Class XI-A</strong>, Roll Number <strong>17</strong> of
+                <strong>Maples Academy Khatauli</strong>, has successfully completed
+                the Computer Science project entitled
                 <strong>"Text-to-Speech Program using Edge TTS"</strong>
-                during the academic session <strong>2025-26</strong> under the guidance
-                of <strong>Er. Pankaj Sir</strong>.
+                during the academic session <strong>2025–26</strong>, under the
+                guidance of <strong>Er. Pankaj Sir</strong> (PGT Computer Science).
                 <br><br>
-                This project has been developed as per the CBSE guidelines for the
-                Class XI practical examination.
+                This project has been prepared in accordance with the guidelines
+                prescribed by the <strong>Central Board of Secondary Education (CBSE)</strong>
+                for Class XI practical examination.
             </p>
 
-            <div class="signature-grid">
-                <div class="signature-item">
-                    <div class="signature-name">Harsh</div>
-                    <div class="signature-role">Student</div>
+            <div class="signatures">
+                <div class="sig-item">
+                    <div class="sig-line"></div>
+                    <div class="sig-name">Harsh</div>
+                    <div class="sig-role">Student</div>
                 </div>
-                <div class="signature-item">
-                    <div class="signature-name">Er. Pankaj Sir</div>
-                    <div class="signature-role">Subject Teacher</div>
+                <div class="sig-item">
+                    <div class="sig-line"></div>
+                    <div class="sig-name">Er. Pankaj Sir</div>
+                    <div class="sig-role">PGT Computer Science</div>
                 </div>
-                <div class="signature-item">
-                    <div class="signature-name">Mrs. Garima Singh</div>
-                    <div class="signature-role">Principal</div>
+                <div class="sig-item">
+                    <div class="sig-line"></div>
+                    <div class="sig-name">Mrs. Garima Singh</div>
+                    <div class="sig-role">Principal</div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- ===== ACKNOWLEDGEMENT ===== -->
-    <section class="section" id="acknowledgement" style="padding-top: 20px;">
-        <div class="section-header">
-            <div class="section-number">2</div>
-            <h2>Acknowledgement</h2>
-            <div class="section-divider"></div>
-        </div>
+    <hr class="section-sep">
 
-        <div class="acknowledgement-text">
-            I would like to express my sincere gratitude to my Computer Science teacher,
-            <strong>Er. Pankaj Sir</strong>, for his invaluable guidance and constant
-            encouragement throughout this project. His expertise in Python programming
-            helped me understand the concepts deeply.
+    <!-- ===== ACKNOWLEDGEMENT ===== -->
+    <section class="section" id="acknowledgement">
+        <div class="section-tag"><i class="fas fa-circle"></i> Section 02</div>
+        <h2 class="section-title">Acknowledgement</h2>
+        <div class="divider-line"></div>
+        <p class="section-desc">Expressing gratitude to those who helped</p>
+
+        <div class="ack-card animate-on-scroll">
+            I would like to express my heartfelt gratitude to my Computer Science teacher,
+            <strong>Er. Pankaj Sir</strong>, for his invaluable guidance, constant encouragement,
+            and expert mentorship throughout the development of this project. His deep
+            knowledge of Python programming and patience in teaching helped me
+            understand complex concepts with ease.
             <br><br>
-            I am also thankful to our respected Principal,
-            <strong>Mrs. Garima Singh</strong>, for providing us with the necessary
-            facilities and a conducive learning environment at
-            <strong>Maples Academy Khatauli</strong>.
+            I am deeply thankful to our esteemed Principal,
+            <strong>Mrs. Garima Singh</strong>, for providing an excellent academic
+            environment and all necessary facilities at <strong>Maples Academy Khatauli</strong>
+            that enabled me to complete this project successfully.
             <br><br>
-            I extend my thanks to my parents and friends who supported and motivated
-            me during the completion of this project.
+            I also extend my sincere thanks to my parents for their unwavering support,
+            and to my classmates who motivated me throughout this journey.
             <br><br>
-            — <strong>Harsh</strong>, Class XI-A, Roll No. 17
+            <div class="ack-signature">
+                — Harsh<br>
+                Class XI-A | Roll No. 17<br>
+                Maples Academy Khatauli<br>
+                Session 2025–26
+            </div>
         </div>
     </section>
 
-    <!-- ===== ABOUT THE PROJECT ===== -->
-    <section class="section" id="about" style="padding-top: 20px;">
-        <div class="section-header">
-            <div class="section-number">3</div>
-            <h2>About the Project</h2>
-            <p>Understanding what this project does and why it matters</p>
-            <div class="section-divider"></div>
-        </div>
+    <hr class="section-sep">
 
-        <div class="card">
-            <h3><span class="icon">🎯</span> Project Overview</h3>
+    <!-- ===== ABOUT PROJECT ===== -->
+    <section class="section" id="about">
+        <div class="section-tag"><i class="fas fa-circle"></i> Section 03</div>
+        <h2 class="section-title">About the Project</h2>
+        <div class="divider-line"></div>
+        <p class="section-desc">Understanding what this project does and its significance</p>
+
+        <div class="card animate-on-scroll">
+            <h3 class="card-title">
+                <span class="card-icon icon-indigo"><i class="fas fa-bullseye"></i></span>
+                Project Overview
+            </h3>
             <p>
                 This project is a <strong>Text-to-Speech (TTS) application</strong>
-                built using Python. It takes text input from the user and converts it
-                into natural-sounding human speech using <strong>Microsoft Edge's
-                Neural AI voices</strong>.
+                built using the Python programming language. It takes text input from the user
+                and converts it into natural-sounding human speech using
+                <strong>Microsoft Edge's Neural AI voices</strong>.
             </p>
             <br>
             <p>
                 The program supports <strong>multiple languages and voices</strong>
                 including Hindi (Male & Female) and English (Male & Female with
                 US & UK accents). Users can type any text — in Hindi or English —
-                choose their preferred voice, and hear the computer speak it out
-                loud with realistic human-like pronunciation.
+                select their preferred voice, and hear the computer speak it out
+                loud with realistic, human-like pronunciation and natural intonation.
             </p>
         </div>
 
-        <div class="card">
-            <h3><span class="icon">💡</span> Why This Project?</h3>
+        <div class="card animate-on-scroll">
+            <h3 class="card-title">
+                <span class="card-icon icon-orange"><i class="fas fa-lightbulb"></i></span>
+                Why This Project?
+            </h3>
             <ul>
-                <li><strong>Real-World Application:</strong> TTS technology is used in Google Assistant, Alexa, Siri, navigation apps, and accessibility tools for visually impaired people.</li>
-                <li><strong>AI & Cloud Computing:</strong> It demonstrates how cloud-based AI services can be accessed using Python.</li>
-                <li><strong>Multi-Language Support:</strong> The program supports both Hindi and English, making it relevant for Indian users.</li>
-                <li><strong>Interactive:</strong> It's not just a script — it takes user input and produces audible output.</li>
+                <li><strong>Real-World Application</strong> — TTS technology powers Google Assistant, Alexa, Siri, GPS navigation, and accessibility tools for visually impaired people.</li>
+                <li><strong>AI & Cloud Computing</strong> — Demonstrates how Python can access powerful cloud-based AI services with just a few lines of code.</li>
+                <li><strong>Multi-Language Support</strong> — Supports both Hindi and English, making it highly relevant for Indian users.</li>
+                <li><strong>Interactive & Fun</strong> — Unlike static programs, this takes user input and produces audible output, making it engaging.</li>
+                <li><strong>Learning Value</strong> — Covers dictionaries, functions, loops, file handling, async programming, and external library usage.</li>
             </ul>
         </div>
 
-        <div class="card">
-            <h3><span class="icon">✨</span> Key Features</h3>
+        <div class="card animate-on-scroll">
+            <h3 class="card-title">
+                <span class="card-icon icon-green"><i class="fas fa-star"></i></span>
+                Key Features
+            </h3>
             <ul>
-                <li>🔊 Converts any typed text into <strong>natural AI speech</strong></li>
-                <li>🇮🇳 Supports <strong>Hindi Male & Female</strong> voices</li>
-                <li>🇺🇸 Supports <strong>English US Male & Female</strong> voices</li>
-                <li>🇬🇧 Supports <strong>English UK Male & Female</strong> voices</li>
-                <li>🎛️ User-friendly <strong>menu-driven interface</strong></li>
-                <li>✅ <strong>Input validation</strong> — handles wrong inputs gracefully</li>
-                <li>🔁 Option to <strong>speak multiple texts</strong> without restarting</li>
-                <li>🧹 Automatic <strong>cleanup</strong> of temporary audio files</li>
+                <li>🔊 Converts any typed text into <strong>natural AI-powered speech</strong></li>
+                <li>🇮🇳 Supports <strong>Hindi Male & Female</strong> voices (Madhur & Swara)</li>
+                <li>🇺🇸 Supports <strong>English US Male & Female</strong> voices (Guy & Jenny)</li>
+                <li>🇬🇧 Supports <strong>English UK Male & Female</strong> voices (Ryan & Sonia)</li>
+                <li>🎛️ User-friendly <strong>menu-driven interface</strong> with numbered options</li>
+                <li>✅ Robust <strong>input validation</strong> — gracefully handles wrong inputs</li>
+                <li>🔁 Option to <strong>speak multiple texts</strong> in one session without restarting</li>
+                <li>🧹 Automatic <strong>cleanup</strong> of temporary audio files on exit</li>
             </ul>
         </div>
     </section>
 
+    <hr class="section-sep">
+
     <!-- ===== TOOLS & TECHNOLOGIES ===== -->
-    <section class="section" id="tools" style="padding-top: 20px;">
-        <div class="section-header">
-            <div class="section-number">4</div>
-            <h2>Tools & Technologies Used</h2>
-            <p>Software, libraries, and technologies powering this project</p>
-            <div class="section-divider"></div>
-        </div>
+    <section class="section" id="tools">
+        <div class="section-tag"><i class="fas fa-circle"></i> Section 04</div>
+        <h2 class="section-title">Tools & Technologies Used</h2>
+        <div class="divider-line"></div>
+        <p class="section-desc">Software, libraries, and services powering this project</p>
 
         <div class="tools-grid">
-            <div class="tool-card">
-                <span class="tool-icon">🐍</span>
+            <div class="tool-card animate-on-scroll">
+                <span class="tool-emoji">🐍</span>
                 <h4>Python 3</h4>
-                <p>The core programming language used. Python is known for its simplicity, readability, and vast library ecosystem. Version 3.8+ is required.</p>
-                <br>
-                <span class="badge badge-blue">Language</span>
+                <p>The core programming language used for the entire project. Known for its simplicity and vast ecosystem. Version 3.8+ is required.</p>
+                <span class="tool-badge tb-lang">LANGUAGE</span>
             </div>
-
-            <div class="tool-card">
-                <span class="tool-icon">🗣️</span>
+            <div class="tool-card animate-on-scroll">
+                <span class="tool-emoji">🗣️</span>
                 <h4>Edge TTS</h4>
-                <p>A Python library that uses Microsoft Edge's online text-to-speech service. It provides free access to 300+ neural AI voices in 40+ languages.</p>
-                <br>
-                <span class="badge badge-orange">Library</span>
+                <p>A Python library that connects to Microsoft Edge's text-to-speech service. Provides free access to 300+ neural AI voices in 40+ languages.</p>
+                <span class="tool-badge tb-lib">LIBRARY</span>
             </div>
-
-            <div class="tool-card">
-                <span class="tool-icon">🎮</span>
+            <div class="tool-card animate-on-scroll">
+                <span class="tool-emoji">🎮</span>
                 <h4>Pygame</h4>
-                <p>A popular Python library for multimedia. Used here to play the generated MP3 audio file through the computer's speakers.</p>
-                <br>
-                <span class="badge badge-green">Library</span>
+                <p>A multimedia library for Python. Used here specifically to load and play the generated MP3 audio through the computer's speakers.</p>
+                <span class="tool-badge tb-lib">LIBRARY</span>
             </div>
-
-            <div class="tool-card">
-                <span class="tool-icon">⚡</span>
+            <div class="tool-card animate-on-scroll">
+                <span class="tool-emoji">⚡</span>
                 <h4>Asyncio</h4>
-                <p>Python's built-in module for asynchronous programming. Required because Edge TTS communicates with Microsoft's servers over the internet.</p>
-                <br>
-                <span class="badge badge-purple">Module</span>
+                <p>Python's built-in module for asynchronous operations. Required because Edge TTS communicates with Microsoft's servers over the internet.</p>
+                <span class="tool-badge tb-mod">MODULE</span>
             </div>
-
-            <div class="tool-card">
-                <span class="tool-icon">🖥️</span>
+            <div class="tool-card animate-on-scroll">
+                <span class="tool-emoji">💻</span>
                 <h4>VS Code / IDLE</h4>
-                <p>The code editor used for writing and testing the Python code. Any IDE or text editor supporting Python can be used.</p>
-                <br>
-                <span class="badge badge-blue">IDE</span>
+                <p>The Integrated Development Environment (IDE) used for writing, editing, debugging, and testing the Python source code.</p>
+                <span class="tool-badge tb-ide">IDE</span>
             </div>
-
-            <div class="tool-card">
-                <span class="tool-icon">☁️</span>
+            <div class="tool-card animate-on-scroll">
+                <span class="tool-emoji">☁️</span>
                 <h4>Microsoft Azure AI</h4>
-                <p>The cloud service that processes the text and generates speech using neural network models. Edge TTS connects to this service automatically.</p>
-                <br>
-                <span class="badge badge-orange">Cloud Service</span>
+                <p>The cloud-based artificial intelligence service that processes text and generates speech using deep neural network models.</p>
+                <span class="tool-badge tb-cloud">CLOUD</span>
             </div>
         </div>
 
-        <div class="card" style="margin-top: 30px;">
-            <h3><span class="icon">📦</span> Installation Commands</h3>
-            <p>Before running the project, these libraries must be installed using pip (Python's package manager):</p>
-            <div class="code-container">
-                <div class="code-header">
-                    <div class="code-dot red"></div>
-                    <div class="code-dot yellow"></div>
-                    <div class="code-dot green"></div>
-                    <span class="code-filename">Terminal / Command Prompt</span>
+        <!-- Installation -->
+        <div class="card animate-on-scroll" style="margin-top: 30px;">
+            <h3 class="card-title">
+                <span class="card-icon icon-cyan"><i class="fas fa-download"></i></span>
+                Installation Commands
+            </h3>
+            <p>Before running the project, install the required libraries using pip:</p>
+            <div class="code-window">
+                <div class="code-titlebar">
+                    <div class="code-btn r"></div>
+                    <div class="code-btn y"></div>
+                    <div class="code-btn g"></div>
+                    <span class="code-fname">Terminal / Command Prompt</span>
                 </div>
-                <div class="code-block">
-<pre>
-<span class="comment"># Install Edge TTS library</span>
-<span class="builtin">pip install</span> edge-tts
+                <div class="code-body">
+<pre><span class="c-comment"># Install Edge TTS library</span>
+<span class="c-built">pip install</span> edge-tts
 
-<span class="comment"># Install Pygame for audio playback</span>
-<span class="builtin">pip install</span> pygame
-</pre>
+<span class="c-comment"># Install Pygame for audio playback</span>
+<span class="c-built">pip install</span> pygame</pre>
                 </div>
             </div>
         </div>
 
-        <!-- Python Concepts Table -->
-        <div class="card">
-            <h3><span class="icon">📚</span> Python Concepts Used</h3>
+        <!-- Concepts Table -->
+        <div class="card animate-on-scroll">
+            <h3 class="card-title">
+                <span class="card-icon icon-pink"><i class="fas fa-book"></i></span>
+                Python Concepts Used
+            </h3>
             <table class="styled-table">
                 <thead>
                     <tr>
@@ -1193,274 +1781,274 @@
                 </thead>
                 <tbody>
                     <tr>
-                        <td><strong>Dictionary</strong></td>
+                        <td>Dictionary</td>
                         <td>VOICES variable</td>
                         <td>Store voice names & IDs as key-value pairs</td>
                     </tr>
                     <tr>
-                        <td><strong>Functions</strong></td>
+                        <td>Functions</td>
                         <td>generate_speech(), play_audio(), main()</td>
                         <td>Modular & reusable code blocks</td>
                     </tr>
                     <tr>
-                        <td><strong>While Loop</strong></td>
+                        <td>While Loop</td>
                         <td>Main menu & input validation</td>
                         <td>Repeat until valid input or user exits</td>
                     </tr>
                     <tr>
-                        <td><strong>For Loop</strong></td>
+                        <td>For Loop</td>
                         <td>Displaying voice options</td>
                         <td>Iterate over dictionary items</td>
                     </tr>
                     <tr>
-                        <td><strong>Conditional Statements</strong></td>
+                        <td>Conditional (if-elif-else)</td>
                         <td>Input validation, menu choices</td>
                         <td>Decision making in program flow</td>
                     </tr>
                     <tr>
-                        <td><strong>String Methods</strong></td>
+                        <td>String Methods</td>
                         <td>.strip(), .lower()</td>
                         <td>Clean and normalize user input</td>
                     </tr>
                     <tr>
-                        <td><strong>Async/Await</strong></td>
+                        <td>Async / Await</td>
                         <td>generate_speech() function</td>
                         <td>Handle network communication efficiently</td>
                     </tr>
                     <tr>
-                        <td><strong>File Handling</strong></td>
+                        <td>File Handling</td>
                         <td>os.path.exists(), os.remove()</td>
                         <td>Manage temporary MP3 file</td>
                     </tr>
                     <tr>
-                        <td><strong>Modules/Imports</strong></td>
+                        <td>Modules & Imports</td>
                         <td>edge_tts, pygame, asyncio, os, time</td>
-                        <td>Use external functionality</td>
+                        <td>Use external functionality in the program</td>
                     </tr>
                 </tbody>
             </table>
         </div>
     </section>
 
+    <hr class="section-sep">
+
     <!-- ===== HOW IT WORKS ===== -->
-    <section class="section" id="working" style="padding-top: 20px;">
-        <div class="section-header">
-            <div class="section-number">5</div>
-            <h2>How It Works</h2>
-            <p>Step-by-step flow of the program</p>
-            <div class="section-divider"></div>
-        </div>
+    <section class="section" id="working">
+        <div class="section-tag"><i class="fas fa-circle"></i> Section 05</div>
+        <h2 class="section-title">How It Works</h2>
+        <div class="divider-line"></div>
+        <p class="section-desc">Step-by-step execution flow of the program</p>
 
-        <!-- FLOWCHART -->
-        <div class="card">
-            <h3><span class="icon">📊</span> Program Flowchart</h3>
+        <!-- Flowchart -->
+        <div class="card animate-on-scroll">
+            <h3 class="card-title">
+                <span class="card-icon icon-indigo"><i class="fas fa-project-diagram"></i></span>
+                Program Flowchart
+            </h3>
             <div class="flowchart">
-                <div class="flow-box flow-start">▶ START</div>
-                <div class="flow-arrow">↓</div>
-                <div class="flow-box flow-process">Display Welcome Message & Voice Menu</div>
-                <div class="flow-arrow">↓</div>
-                <div class="flow-box flow-process">User Selects Voice (1-6)</div>
-                <div class="flow-arrow">↓</div>
-                <div class="flow-box flow-decision">❓ Valid Choice?</div>
-                <div class="flow-arrow">↓ Yes</div>
-                <div class="flow-box flow-process">User Enters Text to Speak</div>
-                <div class="flow-arrow">↓</div>
-                <div class="flow-box flow-process">Send Text + Voice to Microsoft Edge TTS API</div>
-                <div class="flow-arrow">↓</div>
-                <div class="flow-box flow-process">Receive MP3 Audio &amp; Save to File</div>
-                <div class="flow-arrow">↓</div>
-                <div class="flow-box flow-process">🔊 Play Audio using Pygame</div>
-                <div class="flow-arrow">↓</div>
-                <div class="flow-box flow-decision">❓ Speak Again?</div>
-                <div class="flow-arrow">↓ No</div>
-                <div class="flow-box flow-process">Delete Temporary MP3 File</div>
-                <div class="flow-arrow">↓</div>
-                <div class="flow-box flow-end">⏹ END</div>
+                <div class="flow-node flow-start">▶ START PROGRAM</div>
+                <div class="flow-arrow">⬇</div>
+                <div class="flow-node flow-process">Display Welcome Message & Voice Menu</div>
+                <div class="flow-arrow">⬇</div>
+                <div class="flow-node flow-io">📥 User Selects Voice (1–6)</div>
+                <div class="flow-arrow">⬇</div>
+                <div class="flow-node flow-decision">❓ Valid Choice? → If No, Ask Again</div>
+                <div class="flow-arrow">⬇ Yes</div>
+                <div class="flow-node flow-io">📥 User Enters Text to Speak</div>
+                <div class="flow-arrow">⬇</div>
+                <div class="flow-node flow-process">🌐 Send Text + Voice to Microsoft Edge TTS API</div>
+                <div class="flow-arrow">⬇</div>
+                <div class="flow-node flow-process">📥 Receive MP3 Audio & Save to File</div>
+                <div class="flow-arrow">⬇</div>
+                <div class="flow-node flow-process">🔊 Play Audio using Pygame Mixer</div>
+                <div class="flow-arrow">⬇</div>
+                <div class="flow-node flow-decision">❓ Speak Again? → If Yes, Go Back to Menu</div>
+                <div class="flow-arrow">⬇ No</div>
+                <div class="flow-node flow-process">🧹 Delete Temporary MP3 File</div>
+                <div class="flow-arrow">⬇</div>
+                <div class="flow-node flow-end">⏹ END PROGRAM</div>
             </div>
         </div>
 
-        <!-- STEPS -->
-        <div class="steps-container">
-            <div class="step">
-                <div class="step-number-circle">1</div>
-                <div class="step-content">
-                    <h4>Program Starts & Shows Menu</h4>
-                    <p>The program displays a welcome message and shows 6 voice options — Hindi Male/Female, English US Male/Female, English UK Male/Female. User picks one by entering a number.</p>
+        <!-- Steps -->
+        <div class="steps-list" style="margin-top: 30px;">
+            <div class="step-item animate-on-scroll">
+                <div class="step-num">1</div>
+                <div class="step-body">
+                    <h4>Program Launches & Displays Menu</h4>
+                    <p>The program starts with a welcome banner and shows 6 voice options: Hindi Male/Female, English US Male/Female, and English UK Male/Female. The user selects by entering a number (1–6).</p>
                 </div>
             </div>
-
-            <div class="step">
-                <div class="step-number-circle">2</div>
-                <div class="step-content">
+            <div class="step-item animate-on-scroll">
+                <div class="step-num">2</div>
+                <div class="step-body">
                     <h4>User Enters Text</h4>
-                    <p>The user types any text they want to hear. It can be in Hindi (using Hindi keyboard) or English. The program validates that the text is not empty.</p>
+                    <p>The user types any text they want to hear spoken. It can be in Hindi (using Hindi keyboard/typing) or English. The program validates that the input is not empty.</p>
                 </div>
             </div>
-
-            <div class="step">
-                <div class="step-number-circle">3</div>
-                <div class="step-content">
+            <div class="step-item animate-on-scroll">
+                <div class="step-num">3</div>
+                <div class="step-body">
                     <h4>Text Sent to Microsoft's Cloud</h4>
-                    <p>The <code>edge_tts</code> library sends the text and selected voice to Microsoft's Azure cloud servers over the internet. The AI neural network processes the text.</p>
+                    <p>The edge_tts library packages the text and selected voice ID, then sends it to Microsoft's Azure cloud servers over a secure internet connection using asynchronous communication.</p>
                 </div>
             </div>
-
-            <div class="step">
-                <div class="step-number-circle">4</div>
-                <div class="step-content">
-                    <h4>AI Generates Speech</h4>
-                    <p>Microsoft's neural TTS engine converts the text into natural-sounding speech. It understands pronunciation, intonation, pauses, and emotions. The result is sent back as an MP3 file.</p>
+            <div class="step-item animate-on-scroll">
+                <div class="step-num">4</div>
+                <div class="step-body">
+                    <h4>AI Neural Network Generates Speech</h4>
+                    <p>Microsoft's deep learning model processes the text, understanding pronunciation, intonation, emphasis, and natural pauses. It generates a high-quality MP3 audio file and sends it back.</p>
                 </div>
             </div>
-
-            <div class="step">
-                <div class="step-number-circle">5</div>
-                <div class="step-content">
-                    <h4>Audio is Played</h4>
-                    <p>The MP3 file is saved locally and played through the computer's speakers using the <code>pygame.mixer</code> module. The program waits until the audio finishes playing.</p>
+            <div class="step-item animate-on-scroll">
+                <div class="step-num">5</div>
+                <div class="step-body">
+                    <h4>Audio is Played Through Speakers</h4>
+                    <p>The received MP3 file is saved locally as "speech.mp3" and immediately played through the speakers using Pygame's mixer module. The program waits until playback completes.</p>
                 </div>
             </div>
-
-            <div class="step">
-                <div class="step-number-circle">6</div>
-                <div class="step-content">
+            <div class="step-item animate-on-scroll">
+                <div class="step-num">6</div>
+                <div class="step-body">
                     <h4>Repeat or Exit</h4>
-                    <p>The user can choose to speak another text or exit. On exit, the temporary MP3 file is automatically deleted to keep the system clean.</p>
+                    <p>The user is asked if they want to speak more text. If yes, the loop continues. If no, the temporary MP3 file is automatically deleted and the program exits cleanly.</p>
                 </div>
             </div>
         </div>
     </section>
 
+    <hr class="section-sep">
+
     <!-- ===== SOURCE CODE ===== -->
-    <section class="section" id="code" style="padding-top: 20px;">
-        <div class="section-header">
-            <div class="section-number">6</div>
-            <h2>Source Code</h2>
-            <p>Complete Python source code of the project</p>
-            <div class="section-divider"></div>
-        </div>
+    <section class="section" id="source-code">
+        <div class="section-tag"><i class="fas fa-circle"></i> Section 06</div>
+        <h2 class="section-title">Source Code</h2>
+        <div class="divider-line"></div>
+        <p class="section-desc">Complete Python source code of the project</p>
 
-        <div class="code-container">
-            <div class="code-header">
-                <div class="code-dot red"></div>
-                <div class="code-dot yellow"></div>
-                <div class="code-dot green"></div>
-                <span class="code-filename">text_to_speech.py</span>
+        <div class="code-window animate-on-scroll">
+            <div class="code-titlebar">
+                <div class="code-btn r"></div>
+                <div class="code-btn y"></div>
+                <div class="code-btn g"></div>
+                <span class="code-fname">text_to_speech.py — Harsh | Class XI-A | Roll No. 17</span>
             </div>
-            <div class="code-block">
-<pre>
-<span class="comment"># ==========================================</span>
-<span class="comment">#   TEXT-TO-SPEECH PROGRAM (Edge TTS)</span>
-<span class="comment">#   CBSE Class 11 - Computer Science Project</span>
-<span class="comment">#   Made by: Harsh | Class XI-A | Roll No: 17</span>
-<span class="comment"># ==========================================</span>
+            <div class="code-body">
+<pre><span class="c-comment"># ==========================================</span>
+<span class="c-comment">#   TEXT-TO-SPEECH PROGRAM (Edge TTS)</span>
+<span class="c-comment">#   CBSE Class 11 - Computer Science Project</span>
+<span class="c-comment">#   Made by: Harsh | Class XI-A | Roll No: 17</span>
+<span class="c-comment">#   School: Maples Academy Khatauli</span>
+<span class="c-comment">#   Session: 2025-26</span>
+<span class="c-comment"># ==========================================</span>
 
-<span class="keyword">import</span> edge_tts
-<span class="keyword">import</span> asyncio
-<span class="keyword">import</span> pygame
-<span class="keyword">import</span> time
-<span class="keyword">import</span> os
+<span class="c-keyword">import</span> edge_tts
+<span class="c-keyword">import</span> asyncio
+<span class="c-keyword">import</span> pygame
+<span class="c-keyword">import</span> time
+<span class="c-keyword">import</span> os
 
-<span class="comment"># ---------- AVAILABLE VOICES ----------</span>
+<span class="c-comment"># ---------- AVAILABLE VOICES ----------</span>
 VOICES = {
-    <span class="string">"1"</span>: (<span class="string">"Hindi Female"</span>,      <span class="string">"hi-IN-SwaraNeural"</span>),
-    <span class="string">"2"</span>: (<span class="string">"Hindi Male"</span>,        <span class="string">"hi-IN-MadhurNeural"</span>),
-    <span class="string">"3"</span>: (<span class="string">"English Female US"</span>, <span class="string">"en-US-JennyNeural"</span>),
-    <span class="string">"4"</span>: (<span class="string">"English Male US"</span>,   <span class="string">"en-US-GuyNeural"</span>),
-    <span class="string">"5"</span>: (<span class="string">"English Female UK"</span>, <span class="string">"en-GB-SoniaNeural"</span>),
-    <span class="string">"6"</span>: (<span class="string">"English Male UK"</span>,   <span class="string">"en-GB-RyanNeural"</span>),
+    <span class="c-string">"1"</span>: (<span class="c-string">"Hindi Female"</span>,      <span class="c-string">"hi-IN-SwaraNeural"</span>),
+    <span class="c-string">"2"</span>: (<span class="c-string">"Hindi Male"</span>,        <span class="c-string">"hi-IN-MadhurNeural"</span>),
+    <span class="c-string">"3"</span>: (<span class="c-string">"English Female US"</span>, <span class="c-string">"en-US-JennyNeural"</span>),
+    <span class="c-string">"4"</span>: (<span class="c-string">"English Male US"</span>,   <span class="c-string">"en-US-GuyNeural"</span>),
+    <span class="c-string">"5"</span>: (<span class="c-string">"English Female UK"</span>, <span class="c-string">"en-GB-SoniaNeural"</span>),
+    <span class="c-string">"6"</span>: (<span class="c-string">"English Male UK"</span>,   <span class="c-string">"en-GB-RyanNeural"</span>),
 }
 
-OUTPUT_FILE = <span class="string">"speech.mp3"</span>
+OUTPUT_FILE = <span class="c-string">"speech.mp3"</span>
 
 
-<span class="comment"># ---------- GENERATE SPEECH ----------</span>
-<span class="keyword">async def</span> <span class="function">generate_speech</span>(text, voice):
-    communicate = edge_tts.<span class="function">Communicate</span>(text, voice)
-    <span class="keyword">await</span> communicate.<span class="function">save</span>(OUTPUT_FILE)
+<span class="c-comment"># ---------- GENERATE SPEECH ----------</span>
+<span class="c-keyword">async def</span> <span class="c-func">generate_speech</span>(text, voice):
+    communicate = edge_tts.<span class="c-func">Communicate</span>(text, voice)
+    <span class="c-keyword">await</span> communicate.<span class="c-func">save</span>(OUTPUT_FILE)
 
 
-<span class="comment"># ---------- PLAY AUDIO ----------</span>
-<span class="keyword">def</span> <span class="function">play_audio</span>():
-    pygame.mixer.<span class="function">init</span>()
-    pygame.mixer.music.<span class="function">load</span>(OUTPUT_FILE)
-    pygame.mixer.music.<span class="function">play</span>()
-    <span class="keyword">while</span> pygame.mixer.music.<span class="function">get_busy</span>():
-        time.<span class="function">sleep</span>(<span class="string">0.1</span>)
-    pygame.mixer.music.<span class="function">unload</span>()
-    pygame.mixer.<span class="function">quit</span>()
+<span class="c-comment"># ---------- PLAY AUDIO ----------</span>
+<span class="c-keyword">def</span> <span class="c-func">play_audio</span>():
+    pygame.mixer.<span class="c-func">init</span>()
+    pygame.mixer.music.<span class="c-func">load</span>(OUTPUT_FILE)
+    pygame.mixer.music.<span class="c-func">play</span>()
+    <span class="c-keyword">while</span> pygame.mixer.music.<span class="c-func">get_busy</span>():
+        time.<span class="c-func">sleep</span>(<span class="c-const">0.1</span>)
+    pygame.mixer.music.<span class="c-func">unload</span>()
+    pygame.mixer.<span class="c-func">quit</span>()
 
 
-<span class="comment"># ---------- MAIN PROGRAM ----------</span>
-<span class="keyword">def</span> <span class="function">main</span>():
-    <span class="builtin">print</span>()
-    <span class="builtin">print</span>(<span class="string">"  "</span> + <span class="string">"="</span> * 40)
-    <span class="builtin">print</span>(<span class="string">"      TEXT  TO  SPEECH  PROGRAM"</span>)
-    <span class="builtin">print</span>(<span class="string">"      Powered by Microsoft Edge AI"</span>)
-    <span class="builtin">print</span>(<span class="string">"  "</span> + <span class="string">"="</span> * 40)
+<span class="c-comment"># ---------- MAIN PROGRAM ----------</span>
+<span class="c-keyword">def</span> <span class="c-func">main</span>():
+    <span class="c-built">print</span>()
+    <span class="c-built">print</span>(<span class="c-string">"  "</span> + <span class="c-string">"="</span> * <span class="c-const">40</span>)
+    <span class="c-built">print</span>(<span class="c-string">"      TEXT  TO  SPEECH  PROGRAM"</span>)
+    <span class="c-built">print</span>(<span class="c-string">"      Powered by Microsoft Edge AI"</span>)
+    <span class="c-built">print</span>(<span class="c-string">"  "</span> + <span class="c-string">"="</span> * <span class="c-const">40</span>)
 
-    <span class="comment"># Show voice options</span>
-    <span class="builtin">print</span>(<span class="string">"\n  Available Voices:"</span>)
-    <span class="builtin">print</span>(<span class="string">"  "</span> + <span class="string">"-"</span> * 35)
-    <span class="keyword">for</span> key, (name, _) <span class="keyword">in</span> VOICES.<span class="function">items</span>():
-        <span class="builtin">print</span>(<span class="string">f"    {key}. {name}"</span>)
-    <span class="builtin">print</span>(<span class="string">"  "</span> + <span class="string">"-"</span> * 35)
+    <span class="c-comment"># Show voice options</span>
+    <span class="c-built">print</span>(<span class="c-string">"\n  Available Voices:"</span>)
+    <span class="c-built">print</span>(<span class="c-string">"  "</span> + <span class="c-string">"-"</span> * <span class="c-const">35</span>)
+    <span class="c-keyword">for</span> key, (name, _) <span class="c-keyword">in</span> VOICES.<span class="c-func">items</span>():
+        <span class="c-built">print</span>(<span class="c-string">f"    {key}. {name}"</span>)
+    <span class="c-built">print</span>(<span class="c-string">"  "</span> + <span class="c-string">"-"</span> * <span class="c-const">35</span>)
 
-    <span class="keyword">while</span> <span class="builtin">True</span>:
+    <span class="c-keyword">while</span> <span class="c-const">True</span>:
 
-        <span class="comment"># --- Choose Voice ---</span>
-        <span class="keyword">while</span> <span class="builtin">True</span>:
-            choice = <span class="builtin">input</span>(<span class="string">"\n  Choose voice (1-6): "</span>).<span class="function">strip</span>()
-            <span class="keyword">if</span> choice <span class="keyword">in</span> VOICES:
-                <span class="keyword">break</span>
-            <span class="builtin">print</span>(<span class="string">"  Invalid! Enter 1 to 6."</span>)
+        <span class="c-comment"># --- Choose Voice ---</span>
+        <span class="c-keyword">while</span> <span class="c-const">True</span>:
+            choice = <span class="c-built">input</span>(<span class="c-string">"\n  Choose voice (1-6): "</span>).<span class="c-func">strip</span>()
+            <span class="c-keyword">if</span> choice <span class="c-keyword">in</span> VOICES:
+                <span class="c-keyword">break</span>
+            <span class="c-built">print</span>(<span class="c-string">"  Invalid! Enter 1 to 6."</span>)
 
         voice_name, voice_id = VOICES[choice]
 
-        <span class="comment"># --- Enter Text ---</span>
-        text = <span class="builtin">input</span>(<span class="string">"  Enter text to speak: "</span>).<span class="function">strip</span>()
-        <span class="keyword">if not</span> text:
-            <span class="builtin">print</span>(<span class="string">"  Text cannot be empty!"</span>)
-            <span class="keyword">continue</span>
+        <span class="c-comment"># --- Enter Text ---</span>
+        text = <span class="c-built">input</span>(<span class="c-string">"  Enter text to speak: "</span>).<span class="c-func">strip</span>()
+        <span class="c-keyword">if not</span> text:
+            <span class="c-built">print</span>(<span class="c-string">"  Text cannot be empty!"</span>)
+            <span class="c-keyword">continue</span>
 
-        <span class="comment"># --- Generate & Play ---</span>
-        <span class="builtin">print</span>(<span class="string">f"\n  Generating speech in [{voice_name}]..."</span>)
-        asyncio.<span class="function">run</span>(<span class="function">generate_speech</span>(text, voice_id))
+        <span class="c-comment"># --- Generate & Play ---</span>
+        <span class="c-built">print</span>(<span class="c-string">f"\n  Generating speech in [{voice_name}]..."</span>)
+        asyncio.<span class="c-func">run</span>(<span class="c-func">generate_speech</span>(text, voice_id))
 
-        <span class="builtin">print</span>(<span class="string">"  Playing audio... 🔊"</span>)
-        <span class="function">play_audio</span>()
-        <span class="builtin">print</span>(<span class="string">"  Done! ✅"</span>)
+        <span class="c-built">print</span>(<span class="c-string">"  Playing audio... 🔊"</span>)
+        <span class="c-func">play_audio</span>()
+        <span class="c-built">print</span>(<span class="c-string">"  Done! ✅"</span>)
 
-        <span class="comment"># --- Play Again? ---</span>
-        again = <span class="builtin">input</span>(<span class="string">"\n  Speak again? (y/n): "</span>).<span class="function">lower</span>()
-        <span class="keyword">if</span> again != <span class="string">"y"</span>:
-            <span class="keyword">break</span>
+        <span class="c-comment"># --- Play Again? ---</span>
+        again = <span class="c-built">input</span>(<span class="c-string">"\n  Speak again? (y/n): "</span>).<span class="c-func">lower</span>()
+        <span class="c-keyword">if</span> again != <span class="c-string">"y"</span>:
+            <span class="c-keyword">break</span>
 
-    <span class="comment"># Cleanup temp file</span>
-    <span class="keyword">if</span> os.path.<span class="function">exists</span>(OUTPUT_FILE):
-        os.<span class="function">remove</span>(OUTPUT_FILE)
+    <span class="c-comment"># Cleanup temp file</span>
+    <span class="c-keyword">if</span> os.path.<span class="c-func">exists</span>(OUTPUT_FILE):
+        os.<span class="c-func">remove</span>(OUTPUT_FILE)
 
-    <span class="builtin">print</span>(<span class="string">"\n  Thanks for using! Goodbye! 👋\n"</span>)
+    <span class="c-built">print</span>(<span class="c-string">"\n  Thanks for using! Goodbye! 👋\n"</span>)
 
 
-<span class="comment"># --- RUN ---</span>
-<span class="function">main</span>()
-</pre>
+<span class="c-comment"># --- RUN ---</span>
+<span class="c-func">main</span>()</pre>
             </div>
         </div>
     </section>
 
-    <!-- ===== OUTPUT ===== -->
-    <section class="section" id="output" style="padding-top: 20px;">
-        <div class="section-header">
-            <div class="section-number">7</div>
-            <h2>Output</h2>
-            <p>Sample output of the program execution</p>
-            <div class="section-divider"></div>
-        </div>
+    <hr class="section-sep">
 
-        <div class="output-box">
-            <h4>▶ OUTPUT — Run 1 (Hindi Female Voice)</h4>
+    <!-- ===== OUTPUT ===== -->
+    <section class="section" id="output">
+        <div class="section-tag"><i class="fas fa-circle"></i> Section 07</div>
+        <h2 class="section-title">Output</h2>
+        <div class="divider-line"></div>
+        <p class="section-desc">Sample output of the program during execution</p>
+
+        <div class="output-window animate-on-scroll">
+            <div class="output-label">
+                <i class="fas fa-circle"></i> OUTPUT — Run 1 (Hindi Female Voice)
+            </div>
 <pre>
   ========================================
       TEXT  TO  SPEECH  PROGRAM
@@ -1477,190 +2065,318 @@ OUTPUT_FILE = <span class="string">"speech.mp3"</span>
     6. English Male UK
   -----------------------------------
 
-  Choose voice (1-6): <span class="user-input">1</span>
-  Enter text to speak: <span class="user-input">नमस्ते, मैं हर्ष हूँ, कक्षा ग्यारहवीं का छात्र</span>
+  Choose voice (1-6): <span class="o-input">1</span>
+  Enter text to speak: <span class="o-input">नमस्ते, मैं हर्ष हूँ, कक्षा ग्यारहवीं का छात्र</span>
 
   Generating speech in [Hindi Female]...
   Playing audio... 🔊
-  <span class="success">Done! ✅</span>
+  <span class="o-success">Done! ✅</span>
 
-  Speak again? (y/n): <span class="user-input">y</span>
+  Speak again? (y/n): <span class="o-input">y</span>
 </pre>
         </div>
 
-        <div class="output-box">
-            <h4>▶ OUTPUT — Run 2 (English Male Voice)</h4>
+        <div class="output-window animate-on-scroll">
+            <div class="output-label">
+                <i class="fas fa-circle"></i> OUTPUT — Run 2 (English Male US Voice)
+            </div>
 <pre>
-  Choose voice (1-6): <span class="user-input">4</span>
-  Enter text to speak: <span class="user-input">Hello! This is my Computer Science project for Class 11.</span>
+  Choose voice (1-6): <span class="o-input">4</span>
+  Enter text to speak: <span class="o-input">Hello! This is my Computer Science project for Class 11.</span>
 
   Generating speech in [English Male US]...
   Playing audio... 🔊
-  <span class="success">Done! ✅</span>
+  <span class="o-success">Done! ✅</span>
 
-  Speak again? (y/n): <span class="user-input">n</span>
+  Speak again? (y/n): <span class="o-input">y</span>
+
+  Choose voice (1-6): <span class="o-input">6</span>
+  Enter text to speak: <span class="o-input">Welcome to Maples Academy Khatauli!</span>
+
+  Generating speech in [English Male UK]...
+  Playing audio... 🔊
+  <span class="o-success">Done! ✅</span>
+
+  Speak again? (y/n): <span class="o-input">n</span>
 
   Thanks for using! Goodbye! 👋
 </pre>
         </div>
 
-        <div class="card">
-            <h3><span class="icon">🔊</span> What Happens During Output</h3>
+        <div class="card animate-on-scroll">
+            <h3 class="card-title">
+                <span class="card-icon icon-orange"><i class="fas fa-volume-up"></i></span>
+                What Happens During Output
+            </h3>
             <ul>
-                <li>The program displays a <strong>menu</strong> with 6 voice options.</li>
-                <li>After the user types text and selects a voice, the program <strong>connects to Microsoft's server</strong> over the internet.</li>
-                <li>Within 2-3 seconds, a <strong>natural AI voice speaks the text</strong> through the computer's speakers.</li>
-                <li>The voice sounds <strong>very human-like</strong> — with proper pronunciation, intonation, and pauses.</li>
-                <li>Hindi text is spoken in <strong>perfect Hindi</strong>, and English text in clear English.</li>
+                <li>The program displays a <strong>clean menu</strong> with 6 AI voice options.</li>
+                <li>After text input and voice selection, it <strong>connects to Microsoft's servers</strong> over the internet.</li>
+                <li>Within <strong>2–3 seconds</strong>, a natural AI voice speaks the text through the speakers.</li>
+                <li>The voice sounds <strong>remarkably human-like</strong> — with proper pronunciation, intonation, pauses, and emotion.</li>
+                <li>Hindi text is spoken in <strong>perfect Hindi accent</strong>, and English text in clear native accents.</li>
             </ul>
         </div>
     </section>
+
+    <hr class="section-sep">
 
     <!-- ===== ADVANTAGES & LIMITATIONS ===== -->
-    <section class="section" style="padding-top: 20px;">
-        <div class="section-header">
-            <div class="section-number">8</div>
-            <h2>Advantages & Limitations</h2>
-            <div class="section-divider"></div>
-        </div>
+    <section class="section">
+        <div class="section-tag"><i class="fas fa-circle"></i> Section 08</div>
+        <h2 class="section-title">Advantages & Limitations</h2>
+        <div class="divider-line"></div>
 
-        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 25px;">
-            <div class="card" style="border-top: 4px solid #28ca41;">
-                <h3><span class="icon">✅</span> Advantages</h3>
+        <div class="adv-grid">
+            <div class="adv-card pros animate-on-scroll">
+                <h3><i class="fas fa-check-circle"></i> Advantages</h3>
                 <ul>
-                    <li>Completely <strong>free</strong> — no API key or payment needed</li>
-                    <li>Very <strong>natural sounding</strong> AI neural voices</li>
-                    <li>Supports <strong>Hindi + English</strong> with multiple accents</li>
-                    <li>Simple and <strong>easy to use</strong> menu interface</li>
-                    <li>Useful for <strong>visually impaired</strong> people</li>
-                    <li>Can be used for <strong>language learning</strong></li>
-                    <li>Code is <strong>short and readable</strong></li>
+                    <li><i class="fas fa-check" style="color:#10b981"></i> Completely <strong>free</strong> — no API key or payment needed</li>
+                    <li><i class="fas fa-check" style="color:#10b981"></i> Very <strong>natural sounding</strong> neural AI voices</li>
+                    <li><i class="fas fa-check" style="color:#10b981"></i> Supports <strong>Hindi + English</strong> with US & UK accents</li>
+                    <li><i class="fas fa-check" style="color:#10b981"></i> Simple <strong>menu-driven</strong> interface</li>
+                    <li><i class="fas fa-check" style="color:#10b981"></i> Useful for <strong>visually impaired</strong> users</li>
+                    <li><i class="fas fa-check" style="color:#10b981"></i> Great for <strong>language learning</strong></li>
+                    <li><i class="fas fa-check" style="color:#10b981"></i> Code is <strong>short & readable</strong></li>
                 </ul>
             </div>
-
-            <div class="card" style="border-top: 4px solid #ff5252;">
-                <h3><span class="icon">⚠️</span> Limitations</h3>
+            <div class="adv-card cons animate-on-scroll">
+                <h3><i class="fas fa-exclamation-circle"></i> Limitations</h3>
                 <ul>
-                    <li>Requires <strong>internet connection</strong> to work</li>
-                    <li>Depends on <strong>Microsoft's servers</strong> being available</li>
-                    <li>Cannot work <strong>offline</strong></li>
-                    <li>Very long texts may take <strong>more time</strong> to process</li>
-                    <li>Audio quality depends on <strong>internet speed</strong></li>
-                    <li>Limited to voices provided by Microsoft Edge</li>
+                    <li><i class="fas fa-times" style="color:#ef4444"></i> Requires <strong>internet connection</strong></li>
+                    <li><i class="fas fa-times" style="color:#ef4444"></i> Depends on <strong>Microsoft's servers</strong></li>
+                    <li><i class="fas fa-times" style="color:#ef4444"></i> Cannot work <strong>offline</strong></li>
+                    <li><i class="fas fa-times" style="color:#ef4444"></i> Long texts may take <strong>more time</strong></li>
+                    <li><i class="fas fa-times" style="color:#ef4444"></i> Quality depends on <strong>internet speed</strong></li>
+                    <li><i class="fas fa-times" style="color:#ef4444"></i> Limited to <strong>Microsoft Edge voices</strong></li>
+                    <li><i class="fas fa-times" style="color:#ef4444"></i> <strong>Terminal-based</strong> (no GUI)</li>
                 </ul>
             </div>
         </div>
     </section>
 
-    <!-- ===== FUTURE ENHANCEMENTS ===== -->
-    <section class="section" style="padding-top: 20px;">
-        <div class="section-header">
-            <div class="section-number">9</div>
-            <h2>Future Enhancements</h2>
-            <div class="section-divider"></div>
-        </div>
+    <hr class="section-sep">
 
-        <div class="card">
-            <h3><span class="icon">🚀</span> Possible Improvements</h3>
+    <!-- ===== FUTURE ENHANCEMENTS ===== -->
+    <section class="section">
+        <div class="section-tag"><i class="fas fa-circle"></i> Section 09</div>
+        <h2 class="section-title">Future Enhancements</h2>
+        <div class="divider-line"></div>
+
+        <div class="card animate-on-scroll">
+            <h3 class="card-title">
+                <span class="card-icon icon-cyan"><i class="fas fa-rocket"></i></span>
+                Possible Improvements
+            </h3>
             <ul>
-                <li>🖥️ Add a <strong>GUI (Graphical User Interface)</strong> using Tkinter for a more visual experience.</li>
-                <li>💾 Add option to <strong>save the audio as MP3/WAV file</strong> for later use.</li>
-                <li>📄 Add <strong>file reading support</strong> — read text from a .txt file and speak it.</li>
-                <li>🎚️ Allow user to <strong>control speed and pitch</strong> of the voice.</li>
-                <li>🌐 Add support for more languages like <strong>Tamil, Bengali, Marathi</strong>, etc.</li>
-                <li>📱 Convert into a <strong>web application</strong> using Flask or Django.</li>
-                <li>🎤 Add <strong>Speech-to-Text</strong> feature (reverse functionality).</li>
+                <li>🖥️ Add a <strong>GUI (Graphical User Interface)</strong> using Tkinter or PyQt for a visual experience.</li>
+                <li>💾 Add option to <strong>save audio as MP3/WAV file</strong> for later use or sharing.</li>
+                <li>📄 Add <strong>file reading support</strong> — read text from a .txt file and speak it aloud.</li>
+                <li>🎚️ Allow user to <strong>control speed, pitch, and volume</strong> of the generated voice.</li>
+                <li>🌐 Add support for more Indian languages like <strong>Tamil, Bengali, Marathi, Telugu</strong>.</li>
+                <li>📱 Convert into a <strong>web application</strong> using Flask or Django framework.</li>
+                <li>🎤 Add <strong>Speech-to-Text</strong> feature for reverse functionality (voice input).</li>
+                <li>📋 Add <strong>clipboard reading</strong> — automatically speak copied text.</li>
             </ul>
         </div>
     </section>
 
-    <!-- ===== CONCLUSION ===== -->
-    <section class="section" id="conclusion" style="padding-top: 20px;">
-        <div class="section-header">
-            <div class="section-number">10</div>
-            <h2>Conclusion</h2>
-            <div class="section-divider"></div>
-        </div>
+    <hr class="section-sep">
 
-        <div class="conclusion-box">
+    <!-- ===== CONCLUSION ===== -->
+    <section class="section section-center" id="conclusion">
+        <div class="section-tag"><i class="fas fa-circle"></i> Section 10</div>
+        <h2 class="section-title">Conclusion</h2>
+        <div class="divider-line"></div>
+
+        <div class="conclusion-card animate-on-scroll">
             <h3>📝 Project Conclusion</h3>
             <p>
-                This Text-to-Speech project has been a wonderful learning experience.
-                Through this project, I have gained practical knowledge of
-                <strong style="color:#ffb300;">Python programming</strong>,
-                including concepts like functions, dictionaries, loops, conditional
+                This Text-to-Speech project has been an enriching and insightful
+                learning experience. Through this project, I have gained practical
+                knowledge of <span class="highlight-text">Python programming</span>,
+                including core concepts like functions, dictionaries, loops, conditional
                 statements, file handling, and working with external libraries.
                 <br><br>
-                I also learned about <strong style="color:#ffb300;">cloud-based AI services</strong>
-                and how modern applications use APIs to access powerful features like
-                neural text-to-speech. The project demonstrates that even a simple
-                Python program can leverage cutting-edge AI technology.
+                I also learned about <span class="highlight-text">cloud-based AI services</span>
+                and how modern applications leverage APIs to access powerful capabilities
+                like neural text-to-speech. The project demonstrates that even a
+                relatively simple Python program can harness cutting-edge artificial
+                intelligence technology.
                 <br><br>
-                The program is <strong style="color:#ffb300;">practical and useful</strong>
-                — it can help visually impaired individuals, assist in language learning,
-                and serve as a foundation for more advanced projects like voice assistants.
+                The program is <span class="highlight-text">practical and impactful</span>
+                — it can assist visually impaired individuals, aid in language learning,
+                and serve as a solid foundation for more advanced projects like voice
+                assistants and accessibility tools.
                 <br><br>
-                I am grateful to <strong style="color:#ffb300;">Er. Pankaj Sir</strong>
-                for guiding me throughout this project and helping me develop both
-                my programming skills and confidence.
+                I am sincerely grateful to <span class="highlight-text">Er. Pankaj Sir</span>
+                for his expert guidance throughout this project, and to
+                <span class="highlight-text">Mrs. Garima Singh</span> (Principal) for
+                fostering an environment of innovation at
+                <span class="highlight-text">Maples Academy Khatauli</span>.
             </p>
         </div>
     </section>
 
-    <!-- ===== BIBLIOGRAPHY ===== -->
-    <section class="section" style="padding-top: 20px;">
-        <div class="section-header">
-            <div class="section-number">11</div>
-            <h2>Bibliography</h2>
-            <p>References and resources used</p>
-            <div class="section-divider"></div>
-        </div>
+    <hr class="section-sep">
 
-        <div class="card">
-            <ul class="bib-list">
-                <li>
-                    <strong>NCERT Computer Science Textbook</strong> — Class XI,
-                    Chapter: Python Programming Fundamentals
-                </li>
-                <li>
-                    <strong>Python Official Documentation</strong> —
-                    docs.python.org — For understanding modules and functions
-                </li>
-                <li>
-                    <strong>Edge TTS Library (PyPI)</strong> —
-                    pypi.org/project/edge-tts — For library usage and voice list
-                </li>
-                <li>
-                    <strong>Pygame Documentation</strong> —
-                    pygame.org/docs — For audio playback methods
-                </li>
-                <li>
-                    <strong>Microsoft Azure AI Speech</strong> —
-                    azure.microsoft.com — For understanding neural TTS technology
-                </li>
-                <li>
-                    <strong>GeeksforGeeks & W3Schools</strong> —
-                    For Python programming tutorials and examples
-                </li>
-            </ul>
+    <!-- ===== BIBLIOGRAPHY ===== -->
+    <section class="section">
+        <div class="section-tag"><i class="fas fa-circle"></i> Section 11</div>
+        <h2 class="section-title">Bibliography</h2>
+        <div class="divider-line"></div>
+        <p class="section-desc">References and resources consulted during the project</p>
+
+        <div class="animate-on-scroll">
+            <div class="bib-item">
+                <div class="bib-num">1</div>
+                <div class="bib-text"><strong>NCERT Computer Science Textbook</strong> — Class XI, Chapter: Getting Started with Python, Python Fundamentals</div>
+            </div>
+            <div class="bib-item">
+                <div class="bib-num">2</div>
+                <div class="bib-text"><strong>Python Official Documentation</strong> — docs.python.org — Modules, Functions, Asyncio reference</div>
+            </div>
+            <div class="bib-item">
+                <div class="bib-num">3</div>
+                <div class="bib-text"><strong>Edge TTS Library (PyPI)</strong> — pypi.org/project/edge-tts — Library documentation and voice list</div>
+            </div>
+            <div class="bib-item">
+                <div class="bib-num">4</div>
+                <div class="bib-text"><strong>Pygame Documentation</strong> — pygame.org/docs — Audio mixer and playback methods</div>
+            </div>
+            <div class="bib-item">
+                <div class="bib-num">5</div>
+                <div class="bib-text"><strong>Microsoft Azure AI Speech Services</strong> — azure.microsoft.com — Neural TTS technology overview</div>
+            </div>
+            <div class="bib-item">
+                <div class="bib-num">6</div>
+                <div class="bib-text"><strong>GeeksforGeeks & W3Schools</strong> — Python programming tutorials, examples, and concept explanations</div>
+            </div>
         </div>
     </section>
 
     <!-- ===== FOOTER ===== -->
     <footer class="footer">
+        <div class="footer-logo">Harsh<span class="dot">.</span>py</div>
         <p>
             Made with <span class="heart">❤️</span> by
-            <span class="name-highlight">Harsh</span> |
-            Class XI-A | Roll No. 17 |
-            Maples Academy Khatauli
+            <strong style="color: var(--accent-3);">Harsh</strong> &nbsp;|&nbsp;
+            Class XI-A &nbsp;|&nbsp; Roll No. 17
         </p>
-        <p style="margin-top: 8px; font-size: 0.75rem; color: #555;">
-            Computer Science Project 2025-26 | Submitted to Er. Pankaj Sir
+        <p>
+            Maples Academy Khatauli &nbsp;|&nbsp; Session 2025–26
         </p>
+        <p style="margin-top: 5px;">
+            Submitted to <strong style="color: var(--orange);">Er. Pankaj Sir</strong> (PGT Computer Science)
+        </p>
+        <div class="footer-links">
+            <a href="#top"><i class="fas fa-home"></i></a>
+            <a href="#source-code"><i class="fas fa-code"></i></a>
+            <a href="#conclusion"><i class="fas fa-flag-checkered"></i></a>
+        </div>
     </footer>
 
-    <!-- ===== BACK TO TOP BUTTON ===== -->
-    <a href="#top" class="back-to-top" title="Back to Top">↑</a>
+    <!-- ===== BACK TO TOP ===== -->
+    <a href="#top" class="back-top" id="backTop" title="Back to Top">
+        <i class="fas fa-arrow-up"></i>
+    </a>
+
+    <!-- ===== PRINT BUTTON ===== -->
+    <button class="print-btn" id="printBtn" onclick="window.print()" title="Print Project">
+        <i class="fas fa-print"></i> Print
+    </button>
+
+    <!-- ===== JAVASCRIPT ===== -->
+    <script>
+        // --- Navbar scroll effect ---
+        const navbar = document.getElementById('top-nav');
+        const backTop = document.getElementById('backTop');
+        const printBtn = document.getElementById('printBtn');
+
+        window.addEventListener('scroll', () => {
+            const scrollY = window.scrollY;
+
+            // Navbar background
+            if (scrollY > 80) {
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
+            }
+
+            // Back to top & print button
+            if (scrollY > 500) {
+                backTop.classList.add('show');
+                printBtn.classList.add('show');
+            } else {
+                backTop.classList.remove('show');
+                printBtn.classList.remove('show');
+            }
+        });
+
+        // --- Mobile menu toggle ---
+        function toggleMenu() {
+            const menu = document.getElementById('navMenu');
+            menu.classList.toggle('open');
+        }
+
+        // Close mobile menu on link click
+        document.querySelectorAll('.nav-menu a').forEach(link => {
+            link.addEventListener('click', () => {
+                document.getElementById('navMenu').classList.remove('open');
+            });
+        });
+
+        // --- Active nav link on scroll ---
+        const sections = document.querySelectorAll('section[id]');
+        const navLinks = document.querySelectorAll('.nav-menu a');
+
+        window.addEventListener('scroll', () => {
+            let current = '';
+            sections.forEach(section => {
+                const top = section.offsetTop - 100;
+                if (window.scrollY >= top) {
+                    current = section.getAttribute('id');
+                }
+            });
+
+            navLinks.forEach(link => {
+                link.classList.remove('active');
+                if (link.getAttribute('href') === '#' + current) {
+                    link.classList.add('active');
+                }
+            });
+        });
+
+        // --- Scroll animation (Intersection Observer) ---
+        const observerOptions = {
+            threshold: 0.15,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.animate-on-scroll').forEach(el => {
+            observer.observe(el);
+        });
+
+        // --- Smooth reveal for cards with stagger ---
+        document.querySelectorAll('.tools-grid .tool-card').forEach((card, i) => {
+            card.style.transitionDelay = (i * 0.1) + 's';
+        });
+
+        document.querySelectorAll('.step-item').forEach((step, i) => {
+            step.style.transitionDelay = (i * 0.12) + 's';
+        });
+
+        document.querySelectorAll('.bib-item').forEach((item, i) => {
+            item.style.transitionDelay = (i * 0.08) + 's';
+        });
+    </script>
 
 </body>
 </html>
